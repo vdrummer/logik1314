@@ -1,8 +1,7 @@
-\documentclass{scrartcl}
-\usepackage{german}
-\usepackage[latin1]{inputenc}
-\usepackage[german]{babel}
-\usepackage{ textcomp }
+\documentclass[a4paper]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{textcomp}
 \usepackage{amsmath}
 
 % zus�tzliche mathematische Symbole, AMS=American Mathematical Society 
@@ -20,7 +19,7 @@
 % Definition der Kopfzeile
 \lhead{
 \begin{tabular}{ll}
-Logik f\"ur Studierende der Informatik
+Logik für Studierende der Informatik
 \end{tabular}
 }
 \chead{}
@@ -34,7 +33,7 @@ Logik f\"ur Studierende der Informatik
 \section*{\underline{1. Aussagenlogik}}
 
 \subsection*{\underline{1. 1. Grundbegriffe}}
-\textbf{Defintion:} (Syntax) Eine aussagenlogische Formel ist eine Zeichenkette, die sich aus den Variablen $A_0, A_1,$ ... und den Symbolen $(, ), \wedge, \vee, \neg$ zusammensetzt und folgende Regeln einh\"alt:
+\textbf{Defintion:} (Syntax) Eine aussagenlogische Formel ist eine Zeichenkette, die sich aus den Variablen $A_0, A_1,$ ... und den Symbolen $(, ), \wedge, \vee, \neg$ zusammensetzt und folgende Regeln einhält:
 \begin{itemize}
 \item Variablen sind Formeln 
 \item Wenn $F_1$ und $F_2$ Formeln sind, dann ist $(F_1 \wedge F_2)$ eine Formel (\textit{Konjunktion})
@@ -50,39 +49,39 @@ Alle Formeln enstehen auf diese Weise.\\
 \item eine Disjunktion $(F_1 \vee F_2)$
 \item eine Negation $\neg F$
 \end{itemize}
-Es tritt immer genau einer dieser F\"alle ein, und ggf sind $F_1$ und $F_2$, bzw. $F$ eindeutig bestimmt.\\
-\textbf{Beispiel:} Wir bezeichnen das erste Zeichen der gegebenen Formel. Es treten die F\"alle auf:
+Es tritt immer genau einer dieser Fälle ein, und ggf sind $F_1$ und $F_2$, bzw. $F$ eindeutig bestimmt.\\
+\textbf{Beispiel:} Wir bezeichnen das erste Zeichen der gegebenen Formel. Es treten die Fälle auf:
 \begin{itemize}
 \item es ist eine Variable $A_i$. Dann ist $A_i$ nach Definition die ganze Formel.
-\item es ist das Zeichen "$\neg$", dann ist nach Definition unserer Formel $\neg F$. $F$ ist also der Rest unserer Zeichenkette.
-\item es ist "$($". Nach Definition ist unsere Formel vom Typ $(F_1 \wedge F_2)$ / $(F_1 \vee F_2)$.
+\item es ist das Zeichen ''$\neg$'', dann ist nach Definition unserer Formel $\neg F$. $F$ ist also der Rest unserer Zeichenkette.
+\item es ist ''$($''. Nach Definition ist unsere Formel vom Typ $(F_1 \wedge F_2)$ / $(F_1 \vee F_2)$.
 \end{itemize}
-Wir nehmen an, dass wir die Formel au{\ss}erdem auch als  $(F'_1 \wedge F'_2)$ / $(F'_1 \vee F'_2)$ lesen k\"onnen. Dann ist entweder $F'_1$ Anfangsst\"uck von $F_1$ oder umgekehrt. Nach dem folgenden Hilfssatz gilt $F_1 = F'_1$ und das unmittelbar folgende Zeichen muss "$\wedge$" oder "$\vee$" sein und legt den Typ der Formel fest. Wenn man eine Formel nach obigem Lemma zerlegt hat und die Formel keine Variable war, dann wendet man das Lemma anschie{\"ss}end weiter auf $F_1$ und $F_2$ bzw. $F$ an bis die Formel komplett zerlegt wurde.\\
-\textbf{Hilfssatz:} Kein echtes Anfangsst\"uck einer Formel ist selbst eine Formel. Mit "\textit{echtem Anfangsst\"uck}" meinen wir ein Anfangsst\"uck, das nicht die ganze Formel ist.\\
-\textbf{Beispiel:} $(F_1$ ist Anfangsst\"uck von $(F_1 \wedge F_2)$.\\
-\textbf{Beweis:} Durch Induktion \"uber die L\"ange der Formel. Sei $F$ Formel der L\"ange 1, dann hat $F$ das echte Anfangsst\"uck " " (\textit{leere Formel}), aber das ist keine Formel.\\ 
+Wir nehmen an, dass wir die Formel außerdem auch als  $(F'_1 \wedge F'_2)$ / $(F'_1 \vee F'_2)$ lesen können. Dann ist entweder $F'_1$ Anfangsstück von $F_1$ oder umgekehrt. Nach dem folgenden Hilfssatz gilt $F_1 = F'_1$ und das unmittelbar folgende Zeichen muss ''$\wedge$'' oder ''$\vee$'' sein und legt den Typ der Formel fest. Wenn man eine Formel nach obigem Lemma zerlegt hat und die Formel keine Variable war, dann wendet man das Lemma anschie{\''ss}end weiter auf $F_1$ und $F_2$ bzw. $F$ an bis die Formel komplett zerlegt wurde.\\
+\textbf{Hilfssatz:} Kein echtes Anfangsstück einer Formel ist selbst eine Formel. Mit ''\textit{echtem Anfangsstück}'' meinen wir ein Anfangsstück, das nicht die ganze Formel ist.\\
+\textbf{Beispiel:} $(F_1$ ist Anfangsstück von $(F_1 \wedge F_2)$.\\
+\textbf{Beweis:} Durch Induktion über die Länge der Formel. Sei $F$ Formel der Länge 1, dann hat $F$ das echte Anfangsstück '' '' (\textit{leere Formel}), aber das ist keine Formel.\\ 
 
 \newpage
 
-Wir nehmen jetzt an, dass der Hilfssatz f\"ur alle k\"urzeren Formeln bewiesen werden kann. Wir wenden eine Fallunterscheidung nach dem ersten Buchstaben an.
+Wir nehmen jetzt an, dass der Hilfssatz für alle kürzeren Formeln bewiesen werden kann. Wir wenden eine Fallunterscheidung nach dem ersten Buchstaben an.
 \begin{itemize}
-\item Variable $A_1$: Dann hat $F$ die L\"ange 1.
-\item "$\neg$": Nach Definition gilt: $F = \neg F_1$. Sei $F'$ echtes Anfangsst\"uck von $F_1$, dann folgt $F' = \neg F_1$, und $F'_1$ ist echtes Anfangsst\"uck von $F_1$. Nach Induktionsvoraussetzung ist aber kein echtes Anfangsst\"uck von $F_1$ eine Formel. Also kann $F'$ keine Formel sein.
-\item "$($": Wie im obigen Beweis gilt dann $F = (F_1 \wedge F_2)$ / $(F_1 \vee F_2)$. Sei $F'$ echtes Anfangsst\"uck von $F$, dann folgt $F' = (F_1 \wedge F_2)$ / $(F_1 \vee F_2)$. Da $F_1$ und $F_2$ k\"urzer als $F$ sind und $F_1$ Anfangsst\"uck von $F'_1$ oder $F'_1$ Anfangsst\"uck von $F_1$ ist, muss $F_1 = F'_1$ gelten. Dann muss $F'_2)$ ein Anfangsst\"uck von $F_2)$ sein, also $F'_2$ ein Anfangsst\"uck von $F_2$. Nach Induktionsvoraussetzung kann $F'_2$ kein echtes Anfangsst\"uck gewesen sein.
+\item Variable $A_1$: Dann hat $F$ die Länge 1.
+\item ''$\neg$'': Nach Definition gilt: $F = \neg F_1$. Sei $F'$ echtes Anfangsstück von $F_1$, dann folgt $F' = \neg F_1$, und $F'_1$ ist echtes Anfangsstück von $F_1$. Nach Induktionsvoraussetzung ist aber kein echtes Anfangsstück von $F_1$ eine Formel. Also kann $F'$ keine Formel sein.
+\item ''$($'': Wie im obigen Beweis gilt dann $F = (F_1 \wedge F_2)$ / $(F_1 \vee F_2)$. Sei $F'$ echtes Anfangsstück von $F$, dann folgt $F' = (F_1 \wedge F_2)$ / $(F_1 \vee F_2)$. Da $F_1$ und $F_2$ kürzer als $F$ sind und $F_1$ Anfangsstück von $F'_1$ oder $F'_1$ Anfangsstück von $F_1$ ist, muss $F_1 = F'_1$ gelten. Dann muss $F'_2)$ ein Anfangsstück von $F_2)$ sein, also $F'_2$ ein Anfangsstück von $F_2$. Nach Induktionsvoraussetzung kann $F'_2$ kein echtes Anfangsstück gewesen sein.
 \end{itemize}
-Damit w\"are der Hauptsatz bewiesen. $\square$\\
+Damit wäre der Hauptsatz bewiesen. $\square$\\
 \textbf{Definition:} Es sei $\mathcal{D}$ eine Menge von Variablen, dann ist eine Belegung eine Abbildung $\mathcal{A}$:
 \begin{center}
 $\mathcal{A}: \mathcal{D} \rightarrow \{0, 1\}$
 \end{center}
-Dabei stehen 0, 1 f\"ur die Wahrheitswerte "\textit{falsch}" oder "\textit{wahr}". Sei also $A_3 \in \mathcal{D}$ und $\mathcal{A}(A_3) = 1$, dann hat $A_3$ unter der Belegung $\mathcal{A}$ den Wahrheitswert 1 ("\textit{wahr}"). Wir definieren Verkn\"upfungen von Wahrheitswerten:
+Dabei stehen 0, 1 für die Wahrheitswerte ''\textit{falsch}'' oder ''\textit{wahr}''. Sei also $A_3 \in \mathcal{D}$ und $\mathcal{A}(A_3) = 1$, dann hat $A_3$ unter der Belegung $\mathcal{A}$ den Wahrheitswert 1 (''\textit{wahr}''). Wir definieren Verknüpfungen von Wahrheitswerten:
 
-\[ w_1 \wedge w_2 \Leftrightarrow \left\{
+\[ w_1 \wedge w_2 = \left\{
   \begin{array}{l l}
     1 & \quad \text{$w_1 = 1$ und $w_2 = 1$}\\
     0 & \quad \text{$w_1 = 0$ oder $w_2 = 0$}
   \end{array} \right.\]
-\[ w_1 \vee w_2 \Leftrightarrow \left\{
+\[ w_1 \vee w_2 = \left\{
   \begin{array}{l l}
     1 & \quad \text{$w_1 = 1$ oder $w_2 = 1$}\\
     0 & \quad \text{$w_1 = 0$ und $w_2 = 0$}
@@ -102,34 +101,34 @@ Dabei stehen 0, 1 f\"ur die Wahrheitswerte "\textit{falsch}" oder "\textit{wahr}
 
 \newpage
 
-Wegen des obigen Lemma ist $\mathcal{A}(F)$ dadurch wohldefiniert. Wir verwenden folgende Abk\"urzungen:
+Wegen des obigen Lemma ist $\mathcal{A}(F)$ dadurch wohldefiniert. Wir verwenden folgende Abkürzungen:
 \begin{itemize}
-\item $(F_1 \rightarrow F_2)$ f\"ur $(\neg F_1 \vee F_2)$
-\item $(F_1 \Leftrightarrow F_2)$ f\"ur $((F_1 \rightarrow F_2) \wedge (F_2 \rightarrow F_1))$
-\item $\bigwedge_{i < n}{F_i}$ f\"ur ($F_1 \wedge ... (F{n-2} \wedge F{n-1}) ... )$
-\item $\bigvee_{i < n}{F_i}$ f\"ur ($F_1 \vee ... (F{n-2} \vee F{n-1}) ... )$
-\item $\top$ ("\textit{wahr}") f\"ur $(\neg A_0 \vee A_0)$
-\item $\bot$ ("\textit{falsch}") f\"ur $(\neg A_0 \wedge A_0)$
+\item $(F_1 \rightarrow F_2)$ für $(\neg F_1 \vee F_2)$
+\item $(F_1 \Leftrightarrow F_2)$ für $((F_1 \rightarrow F_2) \wedge (F_2 \rightarrow F_1))$
+\item $\bigwedge_{i < n}{F_i}$ für ($F_1 \wedge ... (F{n-2} \wedge F{n-1}) ... )$
+\item $\bigvee_{i < n}{F_i}$ für ($F_1 \vee ... (F{n-2} \vee F{n-1}) ... )$
+\item $\top$ (''\textit{wahr}'') für $(\neg A_0 \vee A_0)$
+\item $\bot$ (''\textit{falsch}'') für $(\neg A_0 \wedge A_0)$
 \end{itemize}
-\textbf{Konventionen:} Wir k\"onnen $\top$, $\bot$ auch als "\textit{nicht zusammengesetzte}" Formeln betrachten
+\textbf{Konventionen:} Wir können $\top$, $\bot$ auch als ''\textit{nicht zusammengesetzte}'' Formeln betrachten
 \begin{itemize}
 \item $\bigwedge\limits_{i < 0}{F_i} = \top$
 \item $\bigvee\limits_{i < 0}{F_i} = \bot$
 \end{itemize}
-Au{\ss}erdem k\"onnen wir $(F_1 \vee F_2)$ als Abk\"urzungen f\"ur $\neg(\neg F_1 \wedge \neg F_2)$ auffassen. Gelegentlich lassen wir Klammern weg, wenn keine Missverst\"andnisse auftreten. Unsere Abk\"urzungen haben genau wie alle Formeln Wahrheitswerte unter vorgegebenen Bedingungen.\\
+Außerdem können wir $(F_1 \vee F_2)$ als Abkürzungen für $\neg(\neg F_1 \wedge \neg F_2)$ auffassen. Gelegentlich lassen wir Klammern weg, wenn keine Missverständnisse auftreten. Unsere Abkürzungen haben genau wie alle Formeln Wahrheitswerte unter vorgegebenen Bedingungen.\\
 \begin{center}
 $\mathcal{A}(\top) = 1, \mathcal{\bot} = 0,$ usw.
 \end{center}
-Sei $\mathcal(A)$ eine Belegung der Variablen von $F$. Wenn $\mathcal{A}(F) = 1$, sagen wir, "\textit{$\mathcal{A}$ erf\"ullt $F$}", "\textit{$\mathcal{A}$ ist Modell von $F$}", "\textit{$\mathcal{A} \models F$}".\\
-\textbf{Definition:} Eine Formel hei{\ss}t "\textit{allgemeing\"ultig}" oder "\textit{Tautologie}", wenn $\mathcal{A}(F) = 1$ f\"ur alle m\"oglichen Belegungen gilt. Eine Formel $F$ hei{\ss}t "\textit{erf\"ullbar}", wenn es eine Belegung $\mathcal{A}$ mit $\mathcal{A}(F) = 1$ gibt.\\
+Sei $\mathcal(A)$ eine Belegung der Variablen von $F$. Wenn $\mathcal{A}(F) = 1$, sagen wir, ''\textit{$\mathcal{A}$ erfüllt $F$}'', ''\textit{$\mathcal{A}$ ist Modell von $F$}'', ''\textit{$\mathcal{A} \models F$}''.\\
+\textbf{Definition:} Eine Formel heißt ''\textit{allgemeingültig}'' oder ''\textit{Tautologie}'', wenn $\mathcal{A}(F) = 1$ für alle möglichen Belegungen gilt. Eine Formel $F$ heißt ''\textit{erfüllbar}'', wenn es eine Belegung $\mathcal{A}$ mit $\mathcal{A}(F) = 1$ gibt.\\
 \textbf{Beispiel:}
 \begin{itemize}
-\item $\top = (\neg A_0 \vee A_0)$ ist allgemeing\"ultig, $A_0$ ist erf\"ullbar.
-\item $\bot = (\neg A_0 \wedge A_0)$ ist nicht erf\"ullbar. $A_0$ ist nicht allgemeing\"ultig.
+\item $\top = (\neg A_0 \vee A_0)$ ist allgemeingültig, $A_0$ ist erfüllbar.
+\item $\bot = (\neg A_0 \wedge A_0)$ ist nicht erfüllbar. $A_0$ ist nicht allgemeingültig.
 \end{itemize}
 \textbf{Lemma:} 
 \begin{itemize}
-\item $F$ ist genau dann eine Tautologie, wenn $\neg F$ nicht erf\"ullbar ist.
-\item $F$ ist erf\"ullbar genau dann, wenn $\neg F$ keine Tautologie ist.
+\item $F$ ist genau dann eine Tautologie, wenn $\neg F$ nicht erfüllbar ist.
+\item $F$ ist erfüllbar genau dann, wenn $\neg F$ keine Tautologie ist.
 \end{itemize}
 \end{document}
