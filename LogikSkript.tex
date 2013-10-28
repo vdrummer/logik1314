@@ -29,10 +29,11 @@ Logik für Studierende der Informatik
 \rfoot{} 
 
 \begin{document}
+\tableofcontents
+\newpage
+\section{Aussagenlogik}
 
-\section*{\underline{1. Aussagenlogik}}
-
-\subsection*{\underline{1. 1. Grundbegriffe}}
+\subsection{Grundbegriffe}
 \textbf{Defintion:} (Syntax) Eine aussagenlogische Formel ist eine Zeichenkette, die sich aus den Variablen $A_0, A_1,$ ... und den Symbolen $(, ), \wedge, \vee, \neg$ zusammensetzt und folgende Regeln einhält:
 \begin{itemize}
 \item Variablen sind Formeln 
@@ -131,4 +132,93 @@ Sei $\mathcal(A)$ eine Belegung der Variablen von $F$. Wenn $\mathcal{A}(F) = 1$
 \item $F$ ist genau dann eine Tautologie, wenn $\neg F$ nicht erfüllbar ist.
 \item $F$ ist erfüllbar genau dann, wenn $\neg F$ keine Tautologie ist.
 \end{itemize}
+\subsection{Äquivalenz von Formeln und Normalformen}
+\textbf{Def.}:Zwei Formeln F,G in den gleichen Variablen heißen \underline{äquivalent}, kurz $F\equiv G$, wenn $\mathcal{A}(F)=\mathcal{A}(G)$ für alle Belegungen der Variablen.\\
+\textbf{Beispiel}: F = A, G = A$\land$(A$\lor$B)\\
+\textbf{Bemerkung}: \begin{itemize}
+\item F$\equiv G$ genau dann, wenn $F\leftrightarrow G$ allgemeingültig ist.\\ 
+\item F allgemeingültig (kurz $\models$F) genau dann, wenn $F\equiv \top$\\
+\item F erfüllt (kurz $\nvDash \neg $ F) genau dann, wenn F$\not\equiv \bot$\\
+\item "$\equiv$" ist eine  Äquivalenzrelation. [d.h. F$\equiv$F für alle Formeln F\\
+F$\equiv G \Rightarrow G \equiv F$ für alle Formel n F,G\\
+(F$\equiv G $ und $G\equiv H)\Rightarrow F \equiv H$ für alle Formeln F,G,H\\
+Das bedeutet: Die Menge aller Foemeln zerfällt in Äquivalnzklassen [F] mit G$\in$[F]$\Leftrightarrow F\equiv G$ ]\\ 
+\end{itemize}
+\textbf{Bemerkung}: Methoden um Äquivalenz von Formeln zu zeigen:\\
+\begin{itemize}
+\item Fallunterscheidungen für die Belegungen (siehe Bsp, mündlich)\\
+\item Alle Belegungen einsetzen und vergleichen\\
+(A$\land B ) \equiv (B\land A)$ \\
+\begin{tabular}{l|l|l}
+$_A\backslash ^B$ & 0 & 1\\ \hline 0 & 0 & 0\\ \hline 1 & 0 & 1\\\end{tabular}
+\begin{tabular}{l|l|l}
+$_A\backslash ^B$ & 0 & 1 \\ \hline 0 & 0 & 0 \\ \hline 1 & 0 & 1 \end{tabular}\\
+\item Venn-Diagramme: Für jede Variable A male eine "Menge" $M_A$. Punkte in $M_A$ entsprechen Belegungen mit $\mathcal{A}(A)=1$, Punkte außerhalb:$\mathcal{A}(A)=0$\\
+\textbf{Bsp}: (($A\land B)\lor C ) \equiv ((A\lor C ) \land (B \lor C))$\\
+\textbf{Hier noch Grafik einfügen !!!}\\
+\end{itemize}
+\textbf{Def.} Sei F eine Formel, aufgebaut aus Variablen, den Junktoren $\neg, \land, \lor,$ sowie $\top,\bot$. Die zu F \underline{duale} Formel F$^*$ entsteht aus F durch Vertauschen von $\land, \lor$ sowie von $\top, \bot$.
+\textbf{\underline{Lemma}}:F$\equiv$G genau dann, wenn F$^* \equiv$G\\
+\textbf{\underline{Beweis}}: Es sei $\mathcal{A}$ eine Belegung . Vertausche in $\mathcal{A}$ die Werte 0,1 und erhalte eine neue Belegung $\mathcal{A}^*$ \\
+\textbf{Behauptung}: es gilt $\mathcal{A}(F)=1$ genau dann, wenn $\mathcal{A}^*(F^*)=0$.\\
+\textbf{Begründung}: Durch Induktion über Länge der Formel mit dem Lemma über eindeutige Lesbarkeit.\\
+$$F = A\Rightarrow F^*=A$$\\
+$$ \mathcal{A}(F) = \mathcal{A}(A)=1 \Leftrightarrow \mathcal{A}^*(A)=0=\mathcal{A}^*(F^*))$$\\
+$$F=\top \Rightarrow F^*=\bot$$\\
+$$\mathcal{A}(\top) = 1\text{gilt immer genau} A^*(\bot)=0$$\\
+Analog für F=$\bot$\\
+Induktionsschritt:\\
+\begin{itemize}
+\item F = $\neg$ G : \\
+$$ \mathcal{A}(F) = 1 \Leftrightarrow \mathcal{A}(G) = 0$$
+$$\overset{IV}{\Leftrightarrow} \mathcal{A}^*(G^*)=1 \Leftrightarrow \mathcal{A}^*(F^*)=0$$\\
+\item F = ($F_0 \land F_1) , F^*=(F_0^*\lor F_1^*$:\\
+$$\mathcal{A}(F)=1 \Leftrightarrow \mathcal{A}(F_0)=1 ~und~\mathcal{A}(F_1)=1$$\\
+$$\Leftrightarrow \mathcal{A}^*(F_0^*)=0 ~und ~\mathcal{A}^*(F_1^*) = 0$$\\
+$$\Leftrightarrow \mathcal{A}^*(F^*)=0$$\\
+\item F = ($F_0 \lor F_1)$ analog. $\square$\\ 
+\end{itemize}
+\textbf{Satz}: Es gelten folgenden Äquivalnzen sowie ihre Duale:\\
+$$(A\land A ) \equiv A \text{~(Idempotenz)}$$\\
+$$(A\land B) \equiv (B \land A) \text{~(Kommutativität)}$$\\
+$$((A\land B) \lor C) \equiv ((A \lor C ) \land (B\lor C)) \text{~(Distributivität)}$$\\
+$$(A \land (A \land B )) \equiv A \text{~(Absorption)}$$\\
+$$(A \land (B \land C )) \equiv ((A\land B ) \land C) \text{~Assoziatovität)}$$\\
+$$(\bot A) \equiv A$$ \\
+$$(\top \land A) \equiv \top$$\\
+$$(A \land \neg A) \equiv \bot \text{~"(dual zu tertum non datur")}$$\\
+\textbf{Beweis}: Kommutativität, Distributivität, Absorption siehe oben. Rest analog.\\
+\textbf{Def.}: Es seien F,H Formeln und A eine Variable. Dann bezeichnet die Formel F(H/A) die Formel die aus F entsteht, indem man jedes Vorkommen der Variable A durch die Formel H ersetzen. (Dabei gehen wir nicht rekursiv vor d.h. wenn H selbst die Variable A enthält, lassen wir A danach stehen).\\
+\textbf{Bsp.}: F=($A\land B$), G=($B\land A$), H=($B\lor C$)\\
+F(H/B)=($A\land (B\lor C$)), G(H/B)=(($B\lor C) \land A)$\\
+\textbf{\underline{Lemma(Ersetzungslemma)}}: Es seien F,G,H Formeln und A eine Variable. Wenn G$\equiv$ H gilt, dann gelten auch:\\
+$$F(G/A) \equiv F(H/A)(1)$$\\ und $$G(F/A) \equiv H(F/A)(2).$$\\
+\textbf{\underline{Beweis}}: Zu (1) : Bei allen Belegungen $\mathcal{A}$ gilt $\mathcal{A}(G)=\mathcal{A}(H)$. Bei der rekursiven Definition von $\mathcal{A}(F)$ kann ich anstelle $\mathcal{A}(A)$ kann ich $\mathcal{A}(G)~oder~\mathcal{A}(H)$ einsetzen und erhalte beidemal das gleiche Ergebniss für alle Belegungen $\Rightarrow$ (1).\\
+Zu (2): In der rekursiven Definition von $\mathcal{A}(G),\mathcal{A}(H)$ ersetze wieder $\mathcal{A}(A)~durch~\mathcal{A}(F)$, es folgt wieder die Äquivalenz (2). $\square$\\
+\textbf{\underline{WARNUNG}}: Im Allgemeinen folgt aus (1) oder (2) nicht, dass G$\equiv$H.\\
+\textbf{\underline{Satz}}: Es gelten die de Morgenschen Regeln:\\
+$\neg(A\land B) \equiv (\neg A \lor \neg B)$\\
+dual dazu: $\neg(A \lor B) \equiv (\neg A \land B )$\\
+$\neg\neg\neg A \equiv A$.\\z
+\textbf{\underline{Beweis}}: Wie oben, siehe auch Beweis des Dualitätslemma.$\square$\\
+\textbf{\underline{Satz}}: Ein \underline{Literal} ist eine Variable A, oder $\neg $A. Ein Ausdruck der Form:\\
+$\bigvee\limits_{i<m}\bigwedge\limits_{j<n_i} L_{ij}$\\
+wobei $L_{ij}$ Literale sind, heißt "disjunktive Normalform". Dual dazu heißt:\\
+$\bigwedge\limits_{i<m'}\bigvee\limits_{j<n'_i}L'_{ij}$\\
+"konjunktive Normalform".\\
+\textbf{\underline{Satz}}: Jede Formel F ist zu einer Formel in konjunktiver, bzw. disjunktiver Normalform äquivalent.\\
+\textbf{\underline{WARNUNG}}: Diese Normalformen sind nicht eindeutig, z.B. sind:\\
+$$A\equiv A \lor (B\land A)$$\\
+beide in disjunktiver Normalform.\\
+\textbf{\underline{Beweis}}: Induktiv für beide Normalformenzusammen:\\
+Sei etwa F = $(F_0 \land F_1)$, dann bringe zunächst $F_0$ und $F_1$ in die gewünschte Normalform. Für die konjunktive Normalform hänge die beiden großen Konjunktionen zusammen:\\
+$\bigwedge\limits_{i<m_0}\bigvee\limits_{...} L'_{ij} \land \bigwedge\limits_{i<m_1} \bigvee\limits_{...} L''{ij}$\\
+$\rightarrow \bigwedge\limits_{i<m_o+m_1}\bigvee\limits_{...} L_{ij}$.\\
+Für die disjunktive Normalform benutzt man das Distributivgesetz:\\
+$\bigvee\limits_{i<m_0}\bigwedge\limits_{...}L'_{ij} \land \bigvee\limits_{i<_m1}\bigwedge\limits_{...} L''_{ij}$\\
+$\rightarrow \bigvee\limits_{i< m_0\cdot m_1} ( \bigwedge\limits_{...} L'_{ij} \land \bigwedge\limits_{...} L''_{ij})$\\
+Analog verfahre mit F=($F_0\lor F_1)$ (Beides ist analog zum Ausmultiplizieren von Polynomen in mehreeren Veränderlichen ...)\\
+Um F=$\neg$ G in konjunktive Normalform zu bringen, bringe G in disjunktive Normalform und wende dann die de Morgenschen Regeln:\\
+$\neg (\bigvee\limits_{i<m}\bigwedge\limits_{j<n_i}L_{ij})=\bigwedge\limits_{i<m}\bigvee\limits_{j<n_i} \neg L_{ij}$\\
+anschließend beseitige doppelte Veneinungen:$\neg\neg A\equiv A$. Analog für disjunktive Normalform. $\square$
 \end{document}

@@ -1,0 +1,4 @@
+\select@language {ngerman}
+\contentsline {section}{\numberline {1}Aussagenlogik}{2}
+\contentsline {subsection}{\numberline {1.1}Grundbegriffe}{2}
+\contentsline {subsection}{\numberline {1.2}\IeC {\"A}quivalenz von Formeln und Normalformen}{5}
