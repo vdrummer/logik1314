@@ -10,3 +10,9 @@ Wie wärs wenn wir ne Art Log an die Tex/Pdf anfügen, wo man Fixes/Vorschläge 
 Beispiel nicht sicher und würde das dann direkt in die tex-datei schreiben und irgendjemand kann dann nochmal in 
 seinem Aufschrieb schauen, ob das so Sinn macht und entsprechend ändern. 
 Und die Kommunikation übers ReadMe ist auch etwas mühsam :D 
+
+Antwort von Max:
+Die Kommunikation über die Readme ist echt anstrengend.
+Fixes haben wir ja eigentlich schon in git selbst geloggt, solange jeder beim commit eine deskriptive Message benutzt.
+Wenn man sich nicht sicher ist, könnte man das in einer anderen Farbe texen, die dann wieder entfernt wird, sobald es jemand verifiziert oder verbessert hat.
+PS: Warum der Pull Request? Du kannst doch einfach pushen.
