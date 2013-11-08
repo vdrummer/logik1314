@@ -3,6 +3,7 @@
 \usepackage[ngerman]{babel}
 \usepackage{textcomp}
 \usepackage{amsmath}
+\usepackage{stmaryrd}
 
 % zus�tzliche mathematische Symbole, AMS=American Mathematical Society 
 \usepackage{amssymb}
@@ -27,6 +28,7 @@ Logik für Studierende der Informatik
 \lfoot{}
 \cfoot{Seite \thepage}
 \rfoot{} 
+\parindent 0pt
 
 \begin{document}
 \tableofcontents
@@ -221,4 +223,110 @@ Analog verfahre mit F=($F_0\lor F_1)$ (Beides ist analog zum Ausmultiplizieren v
 Um F=$\neg$ G in konjunktive Normalform zu bringen, bringe G in disjunktive Normalform und wende dann die de Morgenschen Regeln:\\
 $\neg (\bigvee\limits_{i<m}\bigwedge\limits_{j<n_i}L_{ij})=\bigwedge\limits_{i<m}\bigvee\limits_{j<n_i} \neg L_{ij}$\\
 anschließend beseitige doppelte Veneinungen:$\neg\neg A\equiv A$. Analog für disjunktive Normalform. $\square$
+
+\subsection{Boole'sche Algebren}
+\textbf{Definition:} Eine boole'sche Algebra $(B,0,1,\sqcap,\sqcup,^\complement)$ besteht aus einer Menge $B$, Elenenten $0,1\in B$, Verknüpfungen $\sqcap,\sqcup: B \times B \rightarrow B$ und einem Komplement $^\complement\in B: a \mapsto a^\complement$, so dass folgende Axiome für $\forall a,b,c,\in B$ gelten:\\
+\begin{tabular}{cccl}
+(1.1) & $a \sqcup a = a$ & $a \sqcap a = a$ & (Idempotenz)\\
+(1.2) & $a \sqcup b = b \sqcup a$ & $a \sqcap b = b \sqcap a$ & (Kommutativität)\\
+(1.3) & $(a \sqcap b) \sqcap c = a \sqcap (b \sqcap c)$ & $(a \sqcup b) \sqcup c = a \sqcup (b \sqcup c)$ & (Assoziaivität)\\
+(1.4) & $a \sqcup (a \sqcap b) = a$ & $a \sqcap (a \sqcup b) = a$ & (Absorption)\\
+(1.5) & $a \sqcap (b \sqcup c) = (a \sqcap b) \sqcup (a \sqcap c)$ & $a \sqcup (b \sqcap c) = (a \sqcup b) \sqcap (a \sqcap c)$ & (Distributivität)\\
+(1.6) & $0 \sqcap a = 0$ & $1 \sqcup a = 1$ & \\
+(1.7) & $a \sqcap a^\complement = 0$ & $a \sqcup a^\complement = 1$ &
+\end{tabular}\medskip\\
+\textbf{Bemerkungen:}
+\begin{itemize}
+\item Eines der Distributivitätsgesetze (1.5) ist überflüssig
+\item Es gelten die de Morgan'schen Regeln
+\end{itemize}
+\textbf{Beispiel einer Folgerung}:\\
+$a \sqcup 0 \stackrel{1.6}{=} a \sqcup (a \sqcap 0) \stackrel{1.4}{=} a$\\
+Analog für $a \sqcap 1 = a$\medskip\\
+\textbf{Beispiel 1:} Es sei $X$ eine Menge. Dann ist die Potenzmenge $\mathcal{P}(X)$ eine boole'sche Algebra $(\mathcal{P}(X),\varnothing,X,\cap,\cup,\setminus\cdot)$.\\ Für $A \subset X$ ist $A^\complement = X \setminus A$\medskip\\
+\textbf{Beispiel 2:} Ein n-Byte sei eine Folge von $n$ Bits aus $\{0,1\}$. Dann bildet die Menge aller n-Bytes eine boole'sche Albegra mit AND, OR, NOT. \medskip\\
+Diese Beispiele sind isomorph. Dabei entspricht dem n-Byte $(b_0,...,b_{n-1})$ die Teilmenge $\{i \in \{0,...,n-1\}\mid b_i = 1\} \in \mathcal{P}(\{0,...,n-1\})$\medskip\\
+Es gibt für boole'sche Algebren das Prinzip der Dualität:\\
+Wenn eine Gleichung gilt, dann gilt sie auch nach Vertauschen von $\sqcap$ und $\sqcup$, sowie von $0$ und $1$.\medskip\\
+\textbf{Definition:} Eine Struktur $(M,\sqcap,\sqcup)$ heißt \underline{Verband}, wenn (1.1) bis (1.4) gelten.\medskip\\
+\textbf{Bemerkung:} Zu jedem Verband gehört eine \underline{partielle Ordnung} $\leq$ mit:
+$$a \leq b \Leftrightarrow a \sqcap b = a$$
+Es gelten:
+\begin{description}
+\item[Reflexivität:] $a \sqcap a = a \Rightarrow a \leq a$
+\item[Antisymmetrie:] Es gelte $a \leq b, b \leq a; a \sqcap b = a, b \sqcap a = b$\\ Aus (1.2) folgt $a = a \sqcap b = b$
+\item[Transitivität:]Es gelte $a \leq b, b \leq c\\a \sqcap b = a, b = b \sqcap c\\a=a \sqcap b = a \sqcap (b \sqcap c) = (a \sqcap b) \sqcap c = a \sqcap c$
+\end{description}
+\textbf{Beispiel:} Die Potenzmenge ist ein Verband mit $A \leq B \Leftrightarrow A \cap B = A \Leftrightarrow A \subseteq B$\medskip\\
+Umgekehrt sei $(M,\leq)$ eine Menge mit partieller Ordnung\medskip\\
+Ein \underline{Infimum} von $a,b \in M$ ist ein Element 
+$$c=\inf(a,b)\text{ mit }c \leq a, c\leq b$$
+so dass
+$$\forall d \in M: c \leq d \leq a, c \leq d \leq b \Rightarrow d = c$$\ \medskip\\
+Ein \underline{Supremum} von $a,b \in M$ ist ein Element 
+$$c=\sup(a,b)\text{ mit }a \leq c, b \leq c$$
+so dass
+$$\forall d \in M: a \leq d \leq c, b \leq d \leq c \Rightarrow d = c$$\ \medskip\\
+Wenn in einer partiellen Ordnung $(M,\leq)$ je zwei $a,b, \in M$ ein Infimum oder Supremum haben, erhalten wir einen Verband mit $a \sqcap b = \inf(a,b)$ und $a \sqcup b = \sup(a,b)$.\medskip\\
+Wenn es Elemente $0,1$ mit $0 \leq a \leq 1\ \forall a \in M$ gibt, dann gilt (1.6).\medskip\\
+Zu einer boole'schen Algebra fehlen noch die Komplemente, sowie die Distributivität.\medskip\\
+\textbf{Beispiel:} (Verband, aber keine boole'sche Algebra)\\
+Sei $V$ ein Vektorraum. Dann bilden die Untervektorräume von $V$ einen Verband $U(V)$ mit $U \leq W \Leftrightarrow U \subseteq W$.\\Dann\\
+$U \sqcap W = U \cap W\\U\sqcup W = U + W =\{u+w\mid u \in U, w \in W\}$\\
+Aber (1.5) ist verletzt! Sei $V = \mathbb{R}^2$:\\
+$U = \mathbb{R} \times \{0\}, W = \{0\} \times \mathbb{R}$ (x- und y-Achse)\\
+Sei $X = \{(x,y) \mid x \in \mathbb{R}\}$, dann:\\
+$U \sqcup W = \mathbb{R}^2\\
+X \sqcap (U \sqcup W) = X\\
+X \sqcap U = \{0\}\\
+X \sqcap W = \{0\}\\
+(X \sqcap U)\sqcup (X \sqcap W) = \{0\}$\medskip\\
+\textbf{Satz:} (Stone'scher Darstellungssatz)\\
+Jede boole'sche Algebra ist Unteralgebra einer Potenzmengenalgebra und jede endliche boole'sche Algebra ist isomorph zu einer Potenzmengenalgebra. \medskip\\
+\textbf{Beweis} der zweiten Aussage:\\
+Sei $(B,0,1,\sqcap,\sqcup,^\complement)$ eine boole'sche Algebra, so dass $B$ eine endliche Menge ist.\\
+Dann ist $B$ ein Verband mit Minimum $0$.\medskip\\
+Ein \underline{Atom} in $B$ ist ein Element $a \in B\setminus\{0\}$, so dass aus $0 \leq b \leq a$ stets $b=0$ oder $b=a$ folgt.\medskip\\
+Sei $x$ die Menge der Atome in $B$.\\
+Definiere $\Phi: B\rightarrow \mathcal{P}(X)$ durch
+$$\Phi(b) = \{a \in X \mid a \leq b\} \in \mathcal{P}(X)$$
+Zeige zunächst: $\Phi$ ist bijektiv:\\
+Surjektivität: Sei $U \subset X$, dann betrachte
+$$b=\bigsqcup_{a \in U} a = a_0\sqcup ... \sqcup a_{k-1}\text{, falls } U=\{a_0,..,a_{k-1}\}$$
+Sei $a \in X$, so gilt
+$$a \leq b \Leftrightarrow a \sqcap(a_0 \sqcup...\sqcup a_{k-1}) = a = (a \sqcap a_0) \sqcup ... \sqcup (a \sqcap a_{k-1})$$
+Da $a \sqcap a_i \leq a, a \sqcap a_i \leq a_i $ und $a,a_i$ Atome gilt entweder
+$$a \sqcap a_i = 0 \Leftrightarrow a \neq a_i$$
+oder
+$$a = a \sqcap a_i = a_i$$
+ist der obige Ausdruck entweder $0$ (falls $a \notin U$) oder $a = a_i \in U$\\
+$\Rightarrow \Phi(b) = U$\medskip\\
+Injektivität:\\
+Es gelte $\Phi(b) = \Phi(a)$,\\ 
+dann gilt $\Phi(b \sqcap c) = \Phi(c)$, denn\medskip\\
+Sei $a \leq b, a \leq c, a$ Atom:\\
+$a = a \sqcap b = a \sqcap c = (a \sqcap b) \sqcap c = a \sqcap (b \sqcap c)$,\\
+also o.B.d.A. $b \leq c$.\smallskip\\
+Betrachte $c \sqcap b^\complement$:\\
+Falls $b \leq c$ und $c \sqcap b^\complement = 0$ folgt $b=c$,\\
+Falls $c \sqcap b^\complement \neq 0$, finden wir $a \in X$\\
+mit $a \leq c \sqcap b^\complement \Rightarrow a \in \Phi(c)\setminus \Phi(b)\ \ \lightning$\medskip\\ % Blitz aus 'stmaryrd'
+Dazu nutzen wir aus, dass $B$ endlich ist:\\
+jede Kette $0 < a < ... < c \sqcap b^\complement$ hat höchstens Länge $\#B$ und für längstmögliche Kette ist $a$ ein Atom.\medskip\\
+$\Rightarrow \Phi$ ist bijektiv\medskip\\
+Noch zu zeigen: $\Phi(0)= \varnothing, \Phi(1) = X$, usw.$\hfill\square$\medskip\\
+\textbf{Beispiel:} Lindenbaum-Algebra\\
+Die Lindenbaum-Algebra in $n$ Variablen $A_0,...,A_{n-1}$ ist die Menge der Äquivalnenzklassen aussagenlogischer Formeln in den Variablen $A_0,...,A_{n-1}$ bezüglich der Äquivalenzen(?) aus 1.2.\smallskip\\
+Schreibe Elemente als $F/\equiv$ (z.B. $(\lnot A_0 \lor A_1)/\equiv$) also
+$$L A_n = \{F/\equiv \mid F\text{ ist aussagenlogische Formel in }A_0,...,A_{n-1}\}$$
+Wir setzen
+\begin{itemize}
+\item $0 = \bot/\equiv = (A_0 \land \lnot A_0)/\equiv$
+\item $1 = \top /\equiv = (A_u \lor \lnot A_0)/\equiv$
+\item $(F/\equiv)\sqcup(G/\equiv) = (F \lor G)/\equiv$
+\item $(F/\equiv) \sqcap (G/\equiv) = (F \land G)/\equiv$
+\item $(F/\equiv)^\complement = \lnot F/\equiv$
+\end{itemize}
+Aus den elementaren Äquivalenzen (Abschnitt 1.2) und dem Ersetzungslemma folgt, dass aööe Axiome einer boole'schen Algebra gelten.\medskip\\
+\textbf{Warnung}: $L A_n$ ist nicht isomorph zu $\mathcal{P}(\{0,...,n-1\})$
 \end{document}
