@@ -4,6 +4,7 @@
 \usepackage{textcomp}
 \usepackage{amsmath}
 \usepackage{stmaryrd}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
 % zus�tzliche mathematische Symbole, AMS=American Mathematical Society 
 \usepackage{amssymb}
@@ -13,6 +14,9 @@
 
 % f�r Namen etc. in Kopf- oder Fu�zeile
 \usepackage{fancyhdr}
+
+% Selbst definierte Farben
+\definecolor{light-gray}{gray}{0.95}
 
 % erlaubt benutzerdefinierte Kopfzeilen 
 \pagestyle{fancy}
@@ -33,6 +37,27 @@ Logik für Studierende der Informatik
 \begin{document}
 \tableofcontents
 \newpage
+
+% KOMMENTARE -------------------------------------------
+% Ilia ( 12.11.13 ): 
+% Verbesseerungsvorschlag 1: Im Header das aktuelle Kapitel anzeigen lassen, für einfachere Navigation
+% Formatierung verbesseren, auch vom Quellcode. Wir haben erst ein paar Seiten und es ist jetzt schon schwer sich zurecht zu 
+% finden. Nutzt beim Texen Kommentare um Blöcke/Themen/Unterthemen zu trennen. 
+% Grade wenn man Abschnitte kopieren will, weil Formeln mehrfach vorkommen, ists echt ein Krampf.
+%
+% TO DO/ TO FIX
+% - Abstände nach Absätzen/ Auflistungen zu groß? 
+% - Einheitliche Darstellung von Abschnittsüberschriften(Beweis/Bemerkung/Definition)
+%   Vorschlag: Fett ohne unterstrich
+% - Definitionen in einer Box darstellen? So kann man schneller von Sachen finden. 
+%   Im Sinne von gängigen Mathe-Büchern, wo für Definitionen und Lemma Boxen verwendet werden.
+%   Oben findet sich ein 'definecolor' = hell-grau und kann mit \colorbox verwendet werden
+%   Hier ne Doku: http://en.wikibooks.org/wiki/LaTeX/Colors
+
+% HIER BEGINNT DAS SKRIPT ----------------------------------------
+
+
+
 \section{Aussagenlogik}
 
 \subsection{Grundbegriffe}
@@ -327,6 +352,151 @@ Wir setzen
 \item $(F/\equiv) \sqcap (G/\equiv) = (F \land G)/\equiv$
 \item $(F/\equiv)^\complement = \lnot F/\equiv$
 \end{itemize}
-Aus den elementaren Äquivalenzen (Abschnitt 1.2) und dem Ersetzungslemma folgt, dass aööe Axiome einer boole'schen Algebra gelten.\medskip\\
-\textbf{Warnung}: $L A_n$ ist nicht isomorph zu $\mathcal{P}(\{0,...,n-1\})$
+Aus den elementaren Äquivalenzen (Abschnitt 1.2) und dem Ersetzungslemma folgt, dass allee Axiome einer boole'schen Algebra gelten.\medskip\\
+\textbf{Warnung}: $L A_n$ ist nicht isomorph zu $\mathcal{P}(\{0,...,n-1\})$\\\\
+
+% Resolutionsmethode 11.11.13
+\subsection{Resolutionsmethode}
+\textbf{Bemerkung:} Um F durch eine Formel in KNF zu ersetzen, braucht man nur `elementare Äquivalenzen' und das Ersetzungslemma. Die 'elementaren Äquivalenzen‘ (Satz 1.2) entsprechen den  Axiomen der Boolschen Algebra (für die Lindenbaum Algebra). \\
+\textbf{Bemerkung:} Um die konjunktive Normalform eindeutig zu machen, vereinbaren wir, dass in 
+
+$$\bigwedge \limits_{i<m}\bigvee\limits_{j<n_{i}} L_{ij} $$
+
+die Ausdrücke $\bigvee\limits_{j<n_{i}} L_{ij}$ Atome sind. \medskip\\
+Das heißt $(\neg )$~$A_{0}~ \vee (\neg )$~$A_{1}~ \vee \cdots \vee (\neg )$~$A_{n-1}$  falls $A_{0}$, $\cdots A_{n-1}$ alle vorkommenden Variablen sind.\\\\\\\\
+
+\textbf{Beispiel:}  $(a \vee b) \wedge (\neg a \vee b) \wedge (a \vee \neg b)  \wedge (\neg a \vee \neg b)$  nicht erfüllbar\medskip\\ 
+\textbf{Beispiel:}  Falls \{A,B\} die Variablen sind:
+
+$$ A \equiv (A \vee B) \wedge (A \vee B)$$
+(Fallunterscheidung nach $\mathcal{A}$(B)) \medskip\\
+\textbf{Beweis:} Diese Zerlegung in Atome macht die konjunktive Normalform eindeutig (bis auf Reihenfolge), aber die neue Formel hat Länge \\
+$$O(2^{\# Variablen})$$
+\begin{itemize}
+\item Eine solche Formel F ist allgemeingültig genau dann, wenn sie alle mögliche keine Atome enthält 
+\item Eine solche Formel F ist nicht erfüllbar genau dann, wenn sie alle mögliche Atome enthält  
+\end{itemize}
+Wir erhalten einen Algorithmus, der 'Allgemeingültigkeit' entscheidet, aber mit einer Laufzeit von $O(2^{\# Variablen})$.\\
+Äquivalenz zu diesem Verfahren ist die 'Brute Force'-Methode:\\
+Es gibt $2^{\# Variablen}$ viele Belegungen.
+Berechne $\mathcal{A}$(F) für jede Belegung $\mathcal{A}$, um Allgemeingültigkeit (oder Erfüllbarkeit) zu entscheiden.\medskip\\
+\textbf{Notation:} Schreibe eine Formel \\
+$$\colorbox{light-gray}{$\bigwedge \limits_{i<m}\bigvee\limits_{j<n_{i}} L_{ij} $} $$
+
+$$\colorbox{light-gray}{$\bigwedge \limits_{i<m}\bigvee\limits_{j<n_{i}} L_{ij}$ } $$
+in KNF als Menge von Klauseln \\
+$$\colorbox{light-gray}{$\bigvee\limits_{j<n_{i}} L_{ij} = \{L_{i,0}, \cdots, L_{i,n-1}\}$}$$
+Eine Klausel ist also eine Menge von Literalen (Variablen oder negierte Variablen). \medskip\\
+Sei also $\mathcal{C}$ = \{$C_{0}, \cdots , C_{m-1}$ \} eine Menge von Klauseln und $\mathcal{A}$ eine Belegung, dann gilt:\medskip\\
+$\mathcal{A} \models \mathcal{C} \Leftrightarrow \mathcal{A} \models C_{i}$ für alle $i < m$. \medskip\\
+$\mathcal{A} \models \mathcal{C}_{i} = \{L_{i,0},\cdots, L_{i,n-1}\} \Leftrightarrow$ Es gibt ein $j<n$ mit $A \models L_{ij}$ \bigskip\\\
+\textbf{Definition:} Es seien
+\begin{flalign*}
+	\colorbox{light-gray}{$C_{1} = \{      A \}\cup P $} \\
+	\colorbox{light-gray}{$C_{2} = \{ \neg A \}\cup Q$}
+\end{flalign*}
+wobei die Klauseln $P$, $Q$ weder $A$ noch $\neg A$ enthalten. \bigskip\\
+Dann heißt \colorbox{light-gray}{$C = P \cup Q $} eine Resultante von $C_{1}$, $C_{2}$.\\ 
+Eine Menge $\mathcal{C}$ von Klauseln heißt unter Resultanten abgeschloßen, wenn sie mit je zwei Klauseln $C_{1}$, $C_{2}$ auch alle ihre Resultanten enthält. \bigskip\\
+
+
+\textbf{Lemma:} Es sei $\mathcal{A}$ eine Belegung der Variablen von $C_{1}$, $C_{2}$.\\
+Dann gilt für die Resultante $C$, dass 
+\colorbox{light-gray}{$\mathcal{A} \models \{ C_{1},C_{2} \} \Leftrightarrow \mathcal{A} \models \{ C_{1},C_{2}, C \}$}.\medskip\\
+
+\textbf{Beweis:} Fallunterscheidung nach $\mathcal{A}(A)$
+\begin{enumerate}
+      \item $\mathcal{A}(A)=0$: Dann gilt \colorbox{light-gray}{$\mathcal{A}\models C_{1} \Leftrightarrow A \models P$, mit $C_{1} = \{A\} \cup P$}
+      \item[] Insbesondere folgt $A \models P \cup Q = C$
+      \item $\mathcal{A}(A)= 1$: Dann gilt \colorbox{light-gray}{$\mathcal{A} \models C_{2} = \{ \neg A \} \cup Q \Leftrightarrow A \models Q$, also folgt $A \models P \cup Q = C$  }
+  \end{enumerate}
+
+Daraus folgt: \\ 
+\colorbox{light-gray}{$\mathcal{A} \models \{C_{1},C_{2}\} \Rightarrow \mathcal{A} \models \{C_{1},C_{2}, C\} $} \medskip\\
+Umgekehrt ist klar: \\ 
+\colorbox{light-gray}{$\mathcal{A} \models \{C_{1},C_{2}, C\} \Rightarrow \mathcal{A} \models \{C_{1},C_{2}\} $} \\
+
+\subsubsection{Satz} Es sei $\mathcal{C}$ eine Menge von Klauseln die unter Resultanten abgeschloßen ist.
+Dann ist $\mathcal{C}$ erfüllbar genau dann, wenn $\emptyset \notin \mathcal{C}$.\\
+
+\textbf{Beweis:} Klausel $\emptyset \notin \mathcal{C} \Rightarrow A \models \mathcal{C}$ für alle $\mathcal{A}$ dann $\mathcal{A} \neq \emptyset$.\\
+Für '$\Leftarrow$' sei $\mathcal{C}$ unter Resultanten abgeschlossen. \bigskip\\
+Induktion über Anzahl der Variablen:\\
+Es sei $A = A_{n-1}$ die 'größte' Variable (größter Index), die in $\mathcal{C}$ vorkommt.\\
+Wäre $\{A\}$, $\{\neg A\} \in \mathcal{C}$, dann wäre $\emptyset$ als Resultante in $\mathcal{C}$ enthalten.\\
+Also dürfen wir annehmen, dass $\{ \neg A \} \notin \mathcal{C}$ (ohne Einschränkung).\\
+Wir betrachten jetzt nurnoch Belegungen $\mathcal{A}$ mit $\mathcal{A}=1$.\\
+Dann bearbeite $\mathcal{C}$ wie folgt:
+\begin{itemize}
+\item Falls $C \in \mathcal{C}$ weder $A$ noch $\neg A$ enthält, behalte $C \in \mathcal{C'}$
+\item Falls $C \in \mathcal{C}$ die Variable $A$ enthält, gilt $A \models C$. Dann streiche $C$ in $\mathcal{C}$
+\item Falls $C \in \mathcal{C}$ die Variable $\neg A$ enthält, sei $C \models \{ \neg A \} \cup Q$, dann streiche $\neg A$, somit sei $Q \in \mathcal{C'}$
+\item (Falls $C \in \mathcal{C}$ weder $A$ noch $\neg A$ enthält, wenn c bereits allgemeingültig, wir hätten also $\mathcal{C}\backslash \{C\}$ betrachten können)
+\end{itemize}
+So erhalten wir eine neue Klauselmenge $\mathcal{C'}$, und es gilt \colorbox{light-gray}{$\mathcal{A'} \models \mathcal{C'} \Rightarrow \mathcal{A} = \mathcal{A'} \cup \{A \rightarrow 1\} \models \mathcal{C}$} \\
+Wenn also $\mathcal{C'}$ erfüllbar ist, ist $\mathcal{C}$ erst recht erfüllbar
+\begin{itemize}
+\item $\mathcal{C'} \notin \emptyset$ dann nach Annahme $\emptyset \notin \mathcal{C}$ und $\{\neg A \} \notin \mathcal{C}$
+% ist das nächste ein C' oder ein C ?
+\item $\mathcal{C'}$ ist unter Resultanten abgeschloßen.
+\end{itemize} 
+Dann sei B eine Variable ($B \neq A$) und \colorbox{light-gray}{$C_{1}' = \{B\} \cup P' \in \mathcal{C'}$}, \colorbox{light-gray}{$C_{2}' = \{\neg B\} \cup Q' \in \mathcal{C'}$}\bigskip\\
+Dann bekommen $\mathcal{C_{2}'}$, $\mathcal{C_{2}'}$ von Klauseln der Form \medskip\\
+\colorbox{light-gray}{$C_{1}= \{\neg A,B\} \cup P'$ oder $C_{1}=C_{1}'$}\\
+\colorbox{light-gray}{$C_{2}= \{\neg A,\neg B\} \cup Q'$ oder $C_{2}=C_{2}'$}\medskip\\
+Somit enthielt $\mathcal{C}$ die Resultante $\{\neg A\} \cup P' \cup Q'$ oder $P' \cup Q'$.\\
+Damit enthält $\mathcal{C'}$ dann die Resultante $P' \cup Q'$ von $C_{1}'$ und $C_{2}'$.\\
+Also ist $\mathcal{C'}$ unter Resultanten abgeschlossen mit $\emptyset \notin \mathcal{C'}$ und enthält eine Variable weniger, so dass wir die Induktionsvorraussetzung anwenden dürfen. Wenn wir keine Variablen übrig haben, gibt es nur die leere Klausel $\emptyset$, aber  $\emptyset \notin \mathcal{C}$ nach Annahme, also $\mathcal{C} = \emptyset$, und $\mathcal{C}$ steht dann \medskip\\
+\colorbox{light-gray}{$\bigwedge \limits_{i<0} ? = \top $}\medskip\\
+also ist $\mathcal{C}$ erfüllbar.\medskip\\
+\textbf{Bemerkung:} Der Beweis liefert auch eine Belegung $\mathcal{A}$, die die ursprüngliche Klauselmenge $\mathcal{C}$ erfüllt.\\
+Aber: Abschließen unter Resultanten kannn eine Laufzeit bis zu $4^{\#Variablen}$ ($3^{\#Variablen}$, falls $A_{i}$, $\neg A_{i}$ nicht simultan vorkommen) haben = nicht sehr effizient. \\
+
+% Satz von Cook
+\subsection{Der Satz von Cook}
+\textbf{Ziel:} SAT = 'Saturierbarkeit', 'Erfüllbarkeit von Formeln' der Aussagenlogik ist ein NP-vollständiges Problem. \bigskip\\
+\textbf{Definition:}
+Es sei $\mathbb{A}$ ein Alphabet, also eine endliche Menge von Zeichen.\\
+Dann bezeichnet $\mathbb{A}$* die Menge aller endlichen Wörter mit Symbolen aus $\mathbb{A}$ und $W \subset \mathbb{A}$* heißt ein Problem. \bigskip\\
+\textbf{Beispiel:} Es sei \colorbox{light-gray}{$\mathbb{A} = \{ \wedge, \vee, \neg, (, ), A_{0}, \cdots ,  A_{n-1}\}$}\\
+$W \subset \mathbb{A}$* sei die Menge aller Aussagenlogischen Formeln. Sei $w \in \mathbb{A}$ ein Wort der Länge $n$. Dann können sie in $O(n)$ Schritten entscheiden, ob $w \in W$.\bigskip\\\\
+Betrachte dazu ein Unterprogramm 'Formel', das sich anhand des nächsten Zeichens wie folgt verhält: \\
+
+\begin{itemize}
+\item $\vee, \wedge, )$ - Fehler
+\item $\neg$ - lasse das Programm 'Formel' ab dem nächsten Zeichen laufen. Wenn nicht $\vee$ oder $\wedge$ kommt - Fehler. Lasse 'Formel' ab dem Zeichen dannach weiterlaufen.
+\item $)$ - Überspringe und ok. Wenn $)$ kommt, überspringe und ok, ansonsten Fehler
+\item Sonst - Zeichen ist Variable, überspringe sie und ok.
+\end{itemize} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}
