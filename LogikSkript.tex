@@ -464,39 +464,75 @@ Betrachte dazu ein Unterprogramm 'Formel', das sich anhand des nächsten Zeichen
 
 \begin{itemize}
 \item $\vee, \wedge, )$ - Fehler
-\item $\neg$ - lasse das Programm 'Formel' ab dem nächsten Zeichen laufen. Wenn nicht $\vee$ oder $\wedge$ kommt - Fehler. Lasse 'Formel' ab dem Zeichen dannach weiterlaufen.
+\item $\neg$ - lasse das Programm 'Formel' ab dem nächsten Zeichen laufen. Wenn nicht $\vee$ oder $\wedge$ kommt - Fehler. Lasse 'Formel' ab dem Zeichen danach weiterlaufen.
 \item $)$ - Überspringe und ok. Wenn $)$ kommt, überspringe und ok, ansonsten Fehler
 \item Sonst - Zeichen ist Variable, überspringe sie und ok.
-\end{itemize} 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\end{itemize}
+\textbf{Wiederholung:} Erfüllbarkeit
+\begin{itemize}
+\item brute force - $O(2^k)$
+\item Resolutionsmethode - $O(3^k)$
+\end{itemize}
+k - Anzahl der Variablen \\
+Auf der anderen Seite - gegeben $\mathcal{A}$ lässt sich $A \models F$ in polynomialer Zeit (in $|F|$) prüfen.\bigskip\\\\
+\textbf{Ziel:} Erfüllbarkeit ist ein NP-vollständiges Problem.
+\bigskip\\\\
+\textbf{Bemerkung:} $F$  ist Tautologie $\Leftrightarrow$ $\neg F$ nicht erfüllbar.\\
+$F \models G \Leftrightarrow F \rightarrow G$ allgemeingültig.\\
+$\Leftrightarrow F \wedge \neg G$ nicht erfüllbar
+\bigskip\\\\
+\textbf{Erinnerung:} Turing Maschinen.
+\begin{itemize}
+\item $\Gamma$ - Alphabet $\Gamma \supset \mathbb{A} \cup \{\_\}$ (Leerzeichen)
+\item $Q$ - Zustände, $q \in Q$, $A \subset F \subset Q$
+\item $F$ - Haltezustände
+\item $A$ - Akzeptable Zustände, $\delta \subset ((Q \backslash F) \times \Gamma) \times (Q \times \Gamma \times \{-1, 0, 1\})$
+\item "Programm"
+\end{itemize}
+Dabei muss jedem $g \in Q \backslash F, a \in \Gamma$ Werte, $g \in Q, a \in \Gamma, d = +1 / -1$ existieren, sodass $(q,a, q', a', d) \in \delta$. Eine Turing-Maschine heißt deterministisch, wenn für alle $q, a$ wie oben die Werte $(q', a', d)$ eindeutig sind. Wenn wir von nicht-deterministischen Turing-Maschinen sprechen, meinen wir alle.\\
+Eine Eingabe ist ein Wert der Länge $n$ aus $\mathbb{A}$, den wir auf das Band schreiben und mit "$\-$" auffüllen. Ein "Lauf" ist eine Folge von Zuständen des Bandes und der Maschine und Position des Schreiblesekopfes, sodass wenn auf der Position des Kopfes "$a$ steht und die Maschine im Zustand $"q_n"$ ist und im nächsten Schritt an der Stelle "$a_{n+1}"$ steht und die Maschine im Zustand $"q_{n+1}"$ ist und der Kopf sich um $d$ bewegt, das Tupel $(q_n, a_n, q_{n+1}, a_{n+1}, d) \in \delta$. Außerdem verändert sich der Zustand nicht, wenn $q_n \in F$.
+\bigskip\\\\
+\textbf{Definition:} Ein Problem $w \in \mathbb{A}$ ist von der Klasse $P$, wenn es eine deterministische Turing-Maschine gibt, die für jedes Wort $w \in \mathbb{A}^*$ der Länge $n$ in $P(n)$ Schritten entscheidet, ob $w \in W$ oder nicht. NP, wenn es eine nicht deterministische Turing-Maschine gibt, sodass für alle $w \in \mathbb{A}^*$, $n = |w|$ einen Lauf gibt, sodass für alle $w \in \mathbb{A}^*, n = |w|$ einen lauf gibt, der in $P(n)$ Schritten entscheidet ob $w \in W$. NP-vollständig, wenn es in NP liegt und jedes andere NP-Problem $w' \subset \mathbb{A}^*$ sich in polynomialer Zeit in ein äquivalentes Problem aus $w \subset \mathbb{A}^{'*}$ überführen lässt, d.h. zu jedem $w' \in \mathbb{A}^{'*}$ lässt sich in $P(|w'|)$ Schritten ein $w \in \mathbb{A}^* \Leftrightarrow w \in W$ bilden.
+\bigskip\\\\
+\textbf{Bemerkung:} Ein Problem ist in NP, wenn man einen Lösungsweg (z.B. eine Belegung $\mathcal{A}$ im Falle der Erfüllbarkeit) raten kann und dann innerhalb polynomialer Zeit prüfen kann ob es korrekt ist.
+\bigskip\\\\
+\textbf{Beispiel:} Primfaktorzerlegung ist in NP. Primzahltest in P.
+\bigskip\\\\
+\textbf{Bemerkung:} Vermutung: P $\neq$ NP. P $\subset$ NP gilt.\\
+Falls P $\neq$ NP: P $\subset$ NP und NP-vollständig $\subset$ NP.\\
+Falls P = NP: NP-vollständig $\subset$ P = NP.
+\bigskip\\\\
+\textbf{Satz (Cook):} Erfüllbarkeit ist NP-vollständig.
+\bigskip\\\\
+\textbf{Bemerkung:} Erfüllbarkeit ist in NP, denn man kann zu jeder möglichen Belegung in polynomialer Zeit prüfen, ob $\mathcal{A} \models F$.\\
+Zu NP-Vollständigkeit sei $W \subset \mathbb{A}^*$ ein NP-Problem und $\delta \subset (Q \backslash F \times P) \times (Q \times \Gamma \times \{-1, 0, 1\})$ eine Turing-Maschine, die das Problem im Sinne der Definition löst. Dabei sei $P(n)$ die Laufzeit des gesuchten Laufes, dabei ist $n$ die Länge des Wortes. Wir brauchen die Variablen:
+\begin{itemize}
+\item $T_{ijk}$ für $- P(n) \leq i \leq P(n), j \in \Gamma, 0 \leq k \leq P(n)$, "zur Zeit $k$ steht an der Stelle $i$ des Bandes der Buchstabe $j."$ - $O(P(n)^2)$
+\item $H_{ik}$ wie oben "der Schreiblesekopf steht zur Zeit $k$ an der Stelle $i"$ - $O(P(n)^2)$
+\item $Q_{qk}$ wie oben, $q \in Q$ "Maschine ist zur zeit $k$ im Zustand $q"$ - $O(P(n))$
+\end{itemize}
+Wir geben die Formel als Menge von Klammern an, dabei gibt es verschiedene Typen:
+\begin{itemize}
+\item $T_{ij0}$ für alle $i$ wie oben, wobei $j$ jetzt der $i$-te Buchstabe des Eingabewortes $w \in \mathbb{A}^* sei.$ $O(P(n)$
+\item $H_{00}$ Startpunkt (Initialisierung)
+\item $Q_{q_{0}0}$ Startzustand (Initialisierung)
+\item $\neg T_{ijk} \vee \neg T_{ij'k}$ für alle $i, k$ wie oben und alle $j \neq j' \in \Gamma$ $O(P(n)^2$ (Eindeutigkeit der Zustände)
+\item $\neg Q_{qk} \vee \neg Q_{q'k}$ für alle $k$ wie oben und alle $q, q' \in Q$ (Eindeutigkeit der Zustände)
+\item $\neg H_{ik} \vee \neg H_{i'k}$ für k wie oben und alle $i \neq i$ (Eindeutigkeit der Zustände)
+\item $\neg T_{ijk} \vee \neg T_{ij',k+1} \vee H_{ik}$ für alle $j \neq j'$ wie oben "Band ändert sich nur am Schreiblesekopf"
+\item $\neg H_{ik} \vee Q_{qk} \vee \neg T_{ijk} \vee (H_{i+0, k+1} \wedge Q_{q',k+1} \wedge T_{ij'k}) (q, j, q', j', d) \in \delta$ (Lauf)
+\item "Übergangsfunktion" lässt sich umwandeln in insgesamt $O(P(n)^2)$ Klauseln (Lauf)
+\item Analoge Klauseln, die besagen, dass sich der Zustand nicht ändert, wenn $Q_{qk}$ mit $q \in F$ gilt. $O(P(n)^2)$ Stück (Lauf)
+\item Schluss $\bigvee\limits_{q \in A} Q_g P(n)$ beschränkte Anzahl
+\end{itemize}
+Eine Belegung $\mathcal{A}$ der obigen Variablen erfüllt diese Aussage genau dann, wenn sie einen Lauf der Turing-Maschine mit Eingabe $w$ beschreibt, der nach maximal $P(n)$ Schritten in einem akzeptablen Zustand terminiert. Also ist die Klauselmenge äquivalent. Zu "$w \in W$" Zeitaufwand zur Erstellung der Klauselmenge ist polynomial in $|n|$. Also:: Erfüllbarkeit ist NP-vollständig. $\square$
+\bigskip\\\\
+\textbf{Bemerkung:} P = NP gilt genau dann, wenn es einen polynomialen Algorithmus gibt, das die Erfüllbarkeit testet. Ein Problem $w \subset \mathbb{A}^*$ ist genau dann NP-vollständig wenn sich jede Formal $F$ in polynomialer Zeit $P(|F|)$ in ein Wort $w \in \mathbb{A}^*$ übersetzen lässt, sodass $F$ erfüllbar $\Leftrightarrow w \in W$.
+\newpage
+\subsection{Der Kompaktheitssatz}
+\textbf{Satz:} Eine beliebige Menge $X$ von Formeln ist genau dann erfüllbar, wenn jede endliche Teilmenge erfüllbar ist.
+\bigskip\\\\
+\textbf{Bemerkung:} Wenn $X$ unendlich ist, muss man "unendlich lange arbeiten" um Erfüllbarkeit "von Hand" zu beweisen.
+\bigskip\\\\
+\textbf{Aber:} Um zu zeigen, dass $X$ \textbf{nicht} erfüllbar ist, muss man nur die richtige endliche Teilmenge "raten" und dann mit der Resolutionsmethode einen Widerspruch herleiten.
 \end{document}
