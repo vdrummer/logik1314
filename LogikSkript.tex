@@ -534,5 +534,78 @@ Eine Belegung $\mathcal{A}$ der obigen Variablen erfüllt diese Aussage genau da
 \bigskip\\\\
 \textbf{Bemerkung:} Wenn $X$ unendlich ist, muss man "unendlich lange arbeiten" um Erfüllbarkeit "von Hand" zu beweisen.
 \bigskip\\\\
-\textbf{Aber:} Um zu zeigen, dass $X$ \textbf{nicht} erfüllbar ist, muss man nur die richtige endliche Teilmenge "raten" und dann mit der Resolutionsmethode einen Widerspruch herleiten.
+\textbf{Aber:} Um zu zeigen, dass $X$ \textbf{nicht} erfüllbar ist, muss man nur die richtige endliche Teilmenge "raten" und dann mit der Resolutionsmethode einen Widerspruch herleiten.\\
+\underline{Wdh:} Turing Maschinen, P,NP, SAT (Erfüllbarkeit in Aussagenlogik) ist NP-Vollständig.\\
+\subsection*{1.6 Der Kompaktheitsatz}
+\textbf{Satz}: Eine Menge X von Formeln ist genau dann erfüllbar, wenn jede endliche Teilmenge erfüllbar ist.\\ \\
+\textbf{Beweis}:Falls X nicht abzählbar ist, benötigen wir Zorn's Lemma (äquivalent zum Auswahlaxiom).\\
+Sei X abzählbar, dann ist auch die Menge V der Variablen, die in X vorkommen, abzählbar:\\
+$$V=\{A_n|n\in\mathbb{N}\}$$\\
+Annahme: Jede endliche Teimenge von X ist erfüllbar. Wir suchen induktiv $w_i\in \{0,1\}$, für alle i$\in \mathbb{N}$, so dass für jedes n$\in\mathbb{N}$ folgendes gilt:\\
+Für jede endliche Teilmenge Y$\subset$X existiert eine Belegung $\mathcal{A}$ mit $\mathcal{A}$ $\models$Y und $\mathcal{A}(A_i)=w_i$ für alle i$<n$.\\ \\
+\textbf{Induktionsanfang}: n=0 $\checkmark$\\
+Seien $w_0,...,w_{n-1}$ wie oben konstruiert.\\
+Annahme:das gesuchte $w_i$ existiert nicht. Das heißt, für alle $w_n=0$ existiert eine endliche Teilmenge $Y_0$, so dass $\mathcal{A}\not\models Y_0$ für alle $\mathcal{A}$ mit $\mathcal{A}(A_i)=w_i$ für i$<n$, und $\mathcal{A}(A_n)=0$.\\
+Analog: $Y_1 \subset X$ endlich, so das für alle $\mathcal{A}$ mit $\mathcal{A}(A_i)=w_i$ für alle $i<n$ und $\mathcal{A}(A_n)=1$ gilt:\\
+$$\mathcal{A} \not\models Y_1$$\\
+Dann ist $Y_0\cup Y_1$ endlich, und es existiert keine Belegung $\mathcal{A}$ mit $\mathcal{A}(A_i)=w_i$ für $i<n$ und $\mathcal{A} \models Y_0 \cup Y_1$, denn $A_n$ lässt sich nach Annahme nicht so belegen, dass die Formel aus $Y_0$ und $Y_1$ erfüllt wenden. Das ist ein Widerspruch zur Wahl von $w_0,...,w_{n-1}$. Also lassen sich die $w_n$ indukt festlegen, und wir erhalten eine     Belegung $\mathcal{A}$. Sei jetzt F$\in$X, dann sei n der maximale Index einer Variablen, die in F vorkommt (F ist endlich!). Aus der Wahl der $w_0,...,W_{n-1}$ folgt $\mathcal{A}\models \{F\}.~\square$\\ \\
+\textbf{Beispiel}: "$A_{X,r}$=1$\Leftrightarrow$ Var. X hat den Wert r$\in \mathbb{R}$"\\
+X heißt abzählbar genau dann, wenn es eine Folge ($x_n)~n\in\mathbb{N}$ gibt so dass:\\
+$$X=\{x_n|n\in\mathbb{N}\}$$\\
+$\mathbb{Q}$ abzählbar, $\mathbb{R}$ überabzählbar (=nicht abzählbar)\\ \\
+\textbf{Folgerung}: Es sei X eine Menge von Formeln, und es sei G eine Formel, so dass X$\models$ G, dann existiert eine endliche Teilmenge $X_0\subset X$ und X$\models$G.\\ \\
+\textbf{Beweis}: ÜBUNG!!! $\square$\\ \\
+\textbf{Beispiel}: Ein Graph ist eine Menge von Punkten "Ecken" und eine Menge von Kanten (=Linien zwischen diesen Punkten).Er heißt "n-färbbar" , wenn ich jeder Ecke eine "Farbe" 0,...,n-1 zuordnen kann, so dass eine Kante zwei Ecken gleicher Farbe 
+verbindet (z.B Eine pro Land auf der Landkarte, eine Kante pro gemeinsamer Grenze). Ein unendlicher Graph ist genau dann n-färbbar, wenn jeder endliche Teilgraph n-färbbar ist.\\
+Färbungen: Fehlen im Ziegler-Skript!!\\
+\section{Prädikatenlogik}
+"Logik der ersten Stufe"\\
+"$\forall_{x\in\mathbb{R}}\forall_{\delta>0}\exists_{\varepsilon > 0}\forall_{y\in\mathbb{R}}(|y-x|<\varepsilon \rightarrow |f(y)-f(x)|<\delta)$ ~~~"f ist stetig".
+\subsection{Strukturen und Formeln}
+\textbf{Definition}: Eine Sprache L besteht aus:\\
+\begin{itemize}
+\item einer Menge von Konstanten
+\item einer Menge von Funktionszeichen
+\item einer Menge vo Relationszeichen
+\end{itemize}
+Funktionen und Relationen haben eine feste $"$Stelligkeit$"$ (Zahl der erlaubten Argumente)$\geq$ 1\\ \\
+\textbf{Beispiel}: Um Körper zu beschreiben, wählen wir Konstanten $\{0,1\}$, Funktionen $\{+,\cdot , -\}$ dabei haben $+,\cdot$ Stelligkeit 2 und - hat Stelligkeit 1. Für angeordnete Körper nehmen wir die Relation $\{<\}$ hinzu. Funktionen und Relationen werden in Präfix-Notation benutzt:\\
+$$+ab~statt~a+b$$\\ \\
+\textbf{Definition:} Sei L eine Sprache. Eine L-\underline{Struktur} $\mathfrak{A} =\{A,(Z^\mathfrak{A})_{Z\in L} \}$ wobei A eine Meinge ist und $Z^\mathfrak{A}$ je nach Typ von Z:\\
+\begin{itemize}
+\item $Z^\mathfrak{A} \in A$ falls Z Konstante ist
+\item $Z^\mathfrak{A}$:$A^n\rightarrow A$ Abbildung, falls Z eim n-stelliges Funktionssymbol ist
+\item $Z^\mathfrak{A} \subset A^n$ falls ein n-stelliges Relationssymbol ist
+\end{itemize}
+\textbf{Beispiel}: L wie oben, dann sind\\
+$$(\mathbb{R},0_\mathbb{R},1_\mathbb{R},+_\mathbb{R},\cdot_\mathbb{R},-_\mathbb{R},<_\mathbb{R})$$\\
+$$(\mathbb{Q},0_\mathbb{Q},1_\mathbb{Q},+\mathbb{Q},\cdot_\mathbb{Q},-_\mathbb{Q},<\mathbb{Q})$$\\
+Beispiele von L-Strukturen.\\ \\
+\textbf{Definition}: Ein \underline{Isomorphismus} zwischen L-Strukturen $\mathfrak{A}=(A,(Z^\mathfrak{A})_{Z\in L})$ und $\mathfrak{B}=(B,(Z^\mathfrak{A})_{Z\in L})$ ist eine bijektive Abbildung F:$A\rightarrow$B, die mit den Interpretationen der Zeichen aus L verträglich ist:\\
+\begin{itemize}
+\item F($Z^\mathfrak{A}$=Z$^\mathfrak{B}$ für Konstanten
+\item F$\circ Z^\mathfrak{A}=Z^\mathfrak{B}\circ F^n:A^n\rightarrow B$ für Funktionssymbole
+\item F$^n(Z^\mathfrak{A}=Z^\mathfrak{B}$ für Relationssymbole
+\end{itemize}
+Eine L-Antommorphismus von $\mathfrak{A}$ ist ein L-Isomorphismus von $\mathfrak{A}~nach~\mathfrak{A}$. Die Menge der L-Antomophismen bildet eine Gruppe Ant $\mathfrak{A}$.\\
+Fixiere eine Menge von Variablen $v_0,v_1,v_2,...$\\ \\
+\textbf{Definition}: Ein L-Term ist eine Zeichenfolge, die nach folgenden Regeln gebildet ist:\\
+\begin{enumerate}
+\item Jede Konstante ist ein L-Term
+\item Jede Variable ist ein L-Term
+\item Sei f ein n-stelliges Funktionssymbol und seien $t_1,...,t_n$ Terme, dann ist auch f$t_1,...,t_n$ ein Term. \\ \\
+\end{enumerate}
+\textbf{Beispiel:}$"+\cdot 2 \pi v_0"$ bedeutet $2\cdot \pi + v_0$\\
+$"\cdot + v_0 v_1 \pi"$ bedeutet ($v_0+v_1)\cdot \pi$ \\ \\
+\textbf{Lemma}: Für jeden term gilt genau einer der drei folgenden Fälle:
+\begin{itemize}
+\item t ist eine (eindeutige) Konstante 
+\item t ist eine (eindeutige) Variable
+\item t ist von der Form t=f $t_1...t_n$, dabei ist f ein n-stelliges Funktionssymbol und $t_1,..,t_n$ sind eindeutig bestimmte 
+Terme. \\ \\
+\end{itemize}
+\textbf{Beweis}: Analog zu eindeutigen Lebarkeit aussagenlogischer Formeln. $\square$\\ \\
+\textbf{Hilfsatz}: Kein Term ist ein echtes Anfangsstück eines anderen Termes.\\ \\
+\textbf{Beweis}: Analog zur Aussagenlogik... $\square$\\  \\
+Zur besseren Lesbarkeit schreiben wir manchmal f($t_1,...,t_n$) für f$t_1...t_n$\\
 \end{document}

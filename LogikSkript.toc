@@ -7,3 +7,5 @@
 \contentsline {subsubsection}{\numberline {1.4.1}Satz}{14}
 \contentsline {subsection}{\numberline {1.5}Der Satz von Cook}{15}
 \contentsline {subsection}{\numberline {1.6}Der Kompaktheitssatz}{19}
+\contentsline {section}{\numberline {2}Pr\IeC {\"a}dikatenlogik}{20}
+\contentsline {subsection}{\numberline {2.1}Strukturen und Formeln}{20}
