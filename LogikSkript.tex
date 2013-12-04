@@ -38,6 +38,9 @@ Logik für Studierende der Informatik
 \rfoot{} 
 \parindent 0pt
 
+% Definition neuer Befehle
+\newcommand{\mfa}{\mathfrak{A}}  % Shortcut für A in Frakturschrift
+
 \begin{document}
 \tableofcontents
 \newpage
@@ -617,4 +620,111 @@ Terme. \\ \\
 \textbf{Hilfsatz}: Kein Term ist ein echtes Anfangsstück eines anderen Termes.\\ \\
 \textbf{Beweis}: Analog zur Aussagenlogik... $\square$\\  \\
 Zur besseren Lesbarkeit schreiben wir manchmal f($t_1,...,t_n$) für f$t_1...t_n$\\
+
+\textbf{Definition} Sei $L$ eine Sprache. Eine $L$-Formel ist
+\begin{itemize}
+\item $t_0 \circeq t_1$, wobei $t_0,t_1$ Terme. ''$t_0$ ist gleich $t_1$''
+\item $Rt_0 \dots t_{n-1}$, $t_0, \dots ,t_{n-1}$ Terme, $R$ $n$-stelliges Relationssymbol
+\item $\lnot F_0$, $F_0$ Formel
+\item $(F_0 \land F_1)$, wobei $F_0, F_1$ Formeln
+\item $\exists v\ F$, wobei $v$ Variable, $F$ Formel
+\end{itemize}
+Alle Formeln entstehen auf diese Weise.\medskip\\
+\textbf{Beispiel:} $L=(0,f,+,<)$\\
+$\forall v_0\forall v_1 (<0v_1 \rightarrow \exists v_2(<0v_2 \land ((<v_0+v_2v_3 \land <v_3+v_0v_2)\rightarrow (<fv_0+v_1fv_3 \land <fv_3+fv_0v_1))))$\\
+% LaTeX kommt mit der Präfix-Notation nicht so gut klar. Hat jemand ne Idee, wie man das schöner machen kann?
+''$f$ ist stetig'' mit $v_0=x, v_1=\epsilon, v_2=\delta, v_3=y$\medskip\\
+\textbf{Abkürzungen:}\smallskip\\
+\begin{tabular}{l|l}
+Abkürzung & Bedeutung\\\hline
+$\forall v\ F$ & $\lnot\exists v\ \lnot F$\\
+$(F_0 \lor F_1)$ & $\lnot (\lnot F_0 \land \lnot F_1)$\\
+$(F_0 \rightarrow F_1)$ & $(\lnot F_0 \lor F_1)$\\
+$(F_0 \leftrightarrow F_1)$ & $((F_0 \rightarrow F_1) \land (F_1 \rightarrow F_0))$\\
+$(F_0 \land \dots \land F_{n-1})$ & $(F_0 \land \dots \land (F_{n-2} \land F_{n-1})\dots)$\\
+$(F_0 \lor \dots \lor F_{n-1})$ & $(F_0 \lor \dots \lor (F_{n-2} \lor F_{n-1})\dots)$\\
+$\exists v_0 \dots v_{n-1}$ & $\exists v_0 \exists v_1 \dots \exists v_{n-1}$\\
+$\forall v_0 \dots v_{n-1}$ & $\forall v_0 \forall v_1 \dots \forall v_{n-1}$
+\end{tabular}\ \smallskip\\
+Wenn Klammern weggelassen werden, gelten folgende Präzedenzregeln in absteigender Priorität:
+\begin{enumerate}
+\item $\exists,\forall,\lnot$
+\item $\land$
+\item $\lor$
+\item $\rightarrow,\leftrightarrow$
+\end{enumerate}
+\textbf{Lemma:} $L$-Formeln sind eindeutig lesbar.\\
+Das heißt: Auf jede Formel trifft genau einer der Fälle aus obiger Definition zu und die dort eventuell vorkommenden Terme und Teilformeln sind ebenfalls eindeutig.\smallskip\\
+\textbf{Hilfssatz:} Keine Formel ist echtes Anfangsstück einer anderen Formel.\medskip\\
+\textbf{Beweis:} Lemma und Hilfssatz durch Induktion über Länge der Formeln.\\
+Fallunterscheidung nach erstem Symbol der Formel $F$:
+\begin{itemize}
+\item Falls erstes Symbol eine Variable, Konstante oder Funktion ist, muss $F$ vom Typ $F= t_0 \circeq t_1$ sein. Da Terme eindeutig lesbar sind, ist klar, wie $t_0$ und $t_1$ aufgebaut sind und wo $F$ aufhört.
+\item Falls erstes Symbol ein Relationssymbol ist, gilt $F=Rt_0 \dots t_{n-1}$. Dabei legt $R$ die Stelligkeit $n$ fest und $t_0 \dots t_{n-1}$ sind eindeutig.
+\item Falls erstes Symbol $\lnot$ ist, gilt $F= \lnot F_0$. Da $F_0$ kürzer als $F$ ist, ist $F_0$ nach IV eindeutig lesbar.
+\item Falls erstes Symbol $($ ist, gilt $F \in \{(F_0 \land F_1),(F_0 \lor F_1),\dots\}$
+\item Falls erstes Symbol ein Quantor ist, gilt $F=\exists v_1\ F_0$ bzw. $F=\forall v_1\ F_0$. Nach IV ist $F$ eindeutig lesbar.
+\end{itemize}
+$\square$
+\subsection{Semantik}
+\textbf{Definition:} Sei $\mathfrak{A}=(A,(Z^\mathfrak{A})_{Z \in L})$ eine $L$-Struktur. Eine \underline{Belegung} $\beta$ ist eine Abbildung
+$$\beta \colon (v_0,v_1 \dots) \rightarrow A$$
+wobei $(v_0,v_1 \dots)$ die Menge der Variablen ist.\medskip\\
+\textbf{Definition:} Sei $\mathfrak{A}$ eine $L$-Struktur, $\beta$ eine Belegung.\\
+Dann definiere für $L$-Terme $t$ rekursiv
+\begin{itemize}
+\item $t^\mathfrak{A}[\beta] = \beta(v_i)$ falls $t = v_i$
+\item $t^\mathfrak{A}[\beta] = c^\mathfrak{A}$ falls $t = c$ Konstantensymbol
+\item $t^\mathfrak{A}[\beta] = f^\mathfrak{A}(t_1^\mathfrak{A}[\beta], \dots ,t_{n-1}^\mathfrak{A}[\beta])$
+\end{itemize}
+\textbf{Beispiel:} $L=(e,0,\text{Inv})$ Sprache für Gruppen.\\
+Sei $\mathbb{K}$ ein Körper. Dann kann man 2 $L$-Strukturen betrachten:\smallskip\\
+$\mathfrak{A} = (\mathbb{K},0,+,-)$\\
+$\mathfrak{L} = (\mathbb{K} \setminus \{u\},\land,\cdot,^{-1})$\smallskip\\
+Sowie jede Menge möglicher anderer Strukturen.\medskip\\
+\textbf{Definition:} Sei $\mathfrak{A}$ eine $L$-Struktur, $\beta$ eine Belegung.\\
+Der Wahrheitswert von Formeln wird rekursiv wie folgt definiert:
+\begin{itemize}
+\item $\varphi= F_0 \circeq t_1$, dann ist $\varphi^\mfa[\beta]$ wahr, gdw. $t_0^\mfa[\beta] = t_1^\mfa[\beta] \in A$
+\item $\varphi = Rt_0 \dots t_{n-1}$, dann ist $\varphi^\mfa[\beta]$ wahr, gdw. $(t_0^\mfa[\beta], \dots ,t_{n-1}^\mfa[\beta]) \in R^\mfa \subset A^n$
+\item $\varphi = \lnot \varphi_0$, dann ist $\varphi^\mfa[\beta]$ wahr, gdw. $\varphi_0^\mfa[\beta]$ falsch ist
+\item $\varphi = (\varphi_0 \land \varphi_1)$ dann ist $\varphi^\mfa[\beta]$ wahr, gdw. sowohl $\varphi_0^\mfa[\beta]$ als auch $\varphi_1^\mfa[\beta]$ wahr sind
+\item $\varphi = \exists v_i\ \varphi_0$, dann ist $\varphi^\mfa[\beta]$ wahr, gdw. $\exists a \in A \colon \varphi_0^\mfa[\beta \frac{a}{v_i}]$, $(\beta \frac{a}{v})(v_j)=
+\begin{cases}
+a & i = j\\
+\beta[v_j] & i \neq j\\
+\end{cases} $
+\end{itemize}\ \smallskip\\
+Also hat $\exists$ in $\exists v_i\ \varphi_0$ den Gültigkeitsbereich $\varphi_0$. Dort wird die ''globale'' Bedeutung $\beta(v_i)\in A$ durch eine ''lokale'' Bedeutung $a \in A$ ersetzt.\medskip\\
+Globale Variablen: frei\\
+Lokale Variablen: gebunden\medskip\\
+\textbf{Definition:}\\
+Sei $v_i$ eine Variable, $\varphi$ eine $L$-Formel. Dann kommt $v_i$ in $\varphi$ \underline{frei} vor, wenn
+\begin{itemize}
+\item $\varphi = t_0 \circeq t_1$ und $v_i$ kommt in $t_0$ oder $t_1$ vor.
+\item $\varphi = Rt_0 \dots t_{n-1}$ und $v_i$ kommt in einem der Terme vor.
+\item $\varphi = \lnot \varphi_0$ und $v_i$ kommt in $\varphi_0$ frei vor.
+\item $\varphi = \varphi_0 \land \varphi_1$ und $v_i$ kommt in $\varphi_0$ oder $\varphi_1$ frei vor.
+\item $\varphi = \exists v_j\ \varphi_0$ und $v_i \neq v_j$ und $v_i$ kommt frei in $\varphi_0$ vor.
+\end{itemize}
+Insbesondere ist $v_j$ in $\exists v_j\ \varphi_0$ nicht frei.\medskip\\
+\textbf{Lemma}\\
+Seien $\beta,\gamma$ Belegungen in $L$-Struktur $\mfa$.
+\begin{itemize}
+\item Für einen $L$-Term $t$ gilt\\
+$t^\mfa[\beta] = t^\mfa[\gamma]$, wenn $\beta$ und $\gamma$ auf allen Variablen, die in $t$ vorkommen übereinstimmen.
+\item Für eine Formel $\varphi$ gilt\\
+$\varphi^\mfa[\beta]$ gdw. $\varphi^\mfa[\gamma]$, falls $\beta$ und $\gamma$ auf allen Variablen, die in $\varphi$ frei vorkommen übereinstimmen.
+\end{itemize}
+\textbf{Beweis:}\\
+Erste Aussage folgt induktiv über Länge von $t$.\smallskip\\
+Zweite Aussage folgt ebenfalls induktiv:\\
+Klar, falls $\varphi = t_0 \circeq t_1,\varphi = Rt_0 \dots t_{n-1},\varphi = (\varphi_0 \land \varphi_1),\varphi = \lnot \varphi_0$.\smallskip\\
+Sei $\varphi = \exists v_i\ \varphi_0$ und $a \in A$ so, dass $\varphi_0^\mfa[\beta \frac{a}{v_i}]$ wahr ist. Dann stimmt $\gamma \frac{a}{v_i}$ mit $\beta \frac{a}{v_i}$ auf allen Variablen überein, die in $\varphi_0$ frei vorkommen.\\
+Somit gilt auch $\varphi_0^\mfa[\gamma \frac{a}{v_i}]$, somit $\varphi^\mfa[\beta] \Rightarrow \varphi^\mfa[\gamma]$.\smallskip\\
+Genau so: $\varphi^\mfa[\gamma] \Rightarrow \varphi^\mfa[\beta]$ \hfill $\square$\medskip\\
+\textbf{Definition:}
+Eine \underline{Aussage} ist eine $L$-Formel ohne freie Variablen.\medskip\\
+Eine Aussage $\varphi$ gilt in $\mfa$ also unabhängig von Belegungen.\\
+Dafür schreibt man $\mfa \vDash \varphi$, was man ''$\mfa$ ist Modell von $\varphi$'', ''$\varphi$ gilt in $\mfa$'' oder ''$\mfa$ erfüllt $\varphi$'' liest.
 \end{document}
