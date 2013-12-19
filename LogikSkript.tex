@@ -726,5 +726,222 @@ Genau so: $\varphi^\mfa[\gamma] \Rightarrow \varphi^\mfa[\beta]$ \hfill $\square
 \textbf{Definition:}
 Eine \underline{Aussage} ist eine $L$-Formel ohne freie Variablen.\medskip\\
 Eine Aussage $\varphi$ gilt in $\mfa$ also unabhängig von Belegungen.\\
-Dafür schreibt man $\mfa \vDash \varphi$, was man ''$\mfa$ ist Modell von $\varphi$'', ''$\varphi$ gilt in $\mfa$'' oder ''$\mfa$ erfüllt $\varphi$'' liest.
+Dafür schreibt man $\mfa \vDash \varphi$, was man ''$\mfa$ ist Modell von $\varphi$'', ''$\varphi$ gilt in $\mfa$'' oder ''$\mfa$ erfüllt $\varphi$'' liest.\\
+%Eingefügtes von Ilia
+
+	\medskip 
+	Terme: 
+		$v_{i}, c, ft_{0} \dots t_{n-1}$ \\
+	Formeln:  
+		$t_0 \circeq t_1,\quad  Rt_0 \dots t_{n-1}, \quad $\textlnot$ \varphi, (\varphi_0 \wedge \varphi_1) $ \\
+	Abkürzungen (z.B): 
+		$(\varphi - \psi) $, $\varphi \Leftrightarrow \psi$\\
+		$ \forall v, \psi \Leftrightarrow \lnot \exists v_i \lnot \psi $\\
+	Sei $ \mfa = ((A, c^{\mfa}))_{c \in L},\quad f(\mfa)_{f \in L}, \quad  (R^{\mfa})_{R \in L} $eine L-Struktur, \\
+	$\beta :  \lbrace Var \rbrace  \rightarrow$ A eine Belegung  \\
+	\medskip 
+	Dann erhalten wir 
+		$t^{\mfa} \left[\beta \right] \in A $\\
+		$\phi^\mfa \left[\beta \right] \in \lbrace wahr, falsch \rbrace $
+		$\mfa \models \phi \left[ \beta\right], \mfa \nvDash \phi \left[ \beta \right]$ freie Variable \\
+	Aussage = Formel ohne freie Variable \\
+	$\phi$ Aussage:$ \mfa \models \phi \left[ \beta \right] \Leftrightarrow \mfa \models \left[ \gamma \right]$ unabhängig von der Belegung bedeutet:\\
+		 $x_1, \dots x_n$ sind paarweise verschiedene Variablen (die durchaus gleiche Werte haben können) und in $t$ kommen diese Variablen vor.\\
+	$\phi (x_1, x_n)$ bedeutet $x_1, \dots x_n$ wie oben, und in $\phi$ kommen nur $x_1, \dots x_n$ frei vor.\\
+	Für $a_1 \dots a_n \in A$ schreibe $t^\mfa \left[ a_1 \dots a_n \right]$ bzw. $\phi^\mfa \left[ a_1 \dots a_n \right]$ für $t^\mfa \left[ \beta \right]$, $\phi^\mfa \left[\beta \right]$, wobei $\beta(x_i) = a_i$ für $i = 1, \dots, n$\\
+	
+	\underline{Wiederholung}:\\ 
+		$F: \quad \mfa \rightarrow \mathfrak{b} \quad$ Isomorphismus von L-Strukturen, falls \\
+		$F: \quad A \rightarrow B \quad $ bijektiv ist, und $F(c^\mfa)= c^{c^\mathfrak{b}}$ \\
+		$F(f^{\mfa}(a_0,\dots a_{n-1})) = f^{\mathfrak{b}} (F(a_0), \dots ,F(a_{n-1}))$, \\
+		$(a_0 \dots a_{n-1}) \in R^{\mfa} \Leftrightarrow  (F(a_0), \dots ,F(a_{n-1})) \in R^{\mathfrak{b}}$ für alle $c,f,R \in L$\\ 
+	
+	\textbf{Definition}: \\
+		Zwei L-Strukturen heißen elementar äquivalent, wenn für alle L-Aussage gilt: \\
+		$\mfa \models \phi \Leftrightarrow \mathfrak{b} \models \phi $\\
+	
+	\textbf{Lemma}: \\
+		Isomorphe L-Strukturen sind elementar äquivalent.\\
+	
+	\textbf{Beweis}: \\ 
+		Durch Rekursion, dazu brauchen wir zwischendurch auch Belegung $\beta$. \\
+		Sei $F =  \mfa \rightarrow \mathfrak{b} $ ein Isomorphismus.\\
+		Sei $\beta : \lbrace Var \rbrace \rightarrow A $ Belegung in $\mfa$, dann ist $F \circ \beta : \lbrace Var \rbrace \rightarrow B $ eine Belegung in $\mathfrak{b}$.\\
+	
+	\textit{1. Für Terme $t$ gilt:} \medskip \\
+		$F(t^{\mfa}\left[ \beta \right]) = t^{\mathfrak{b}}\left[ F \circ \beta \right])$ \medskip \\
+		$t= c: F(c^{\mfa}) = c^{\mathfrak{b}}$ \medskip \\
+		$t: v: F(t^{\mfa}\left[ \beta \right]) = F(\beta (v))= (F \circ \beta)(v) = t^{\mathfrak{b}}\left[ f \circ \beta \right]$ \medskip \\
+		$t: f_{t_0} , \dots f_{t_n}$ Hier unklar \medskip  \\ 		
+		$F(t^{\mfa}\left[\beta \right]) = F(t^{\mfa}(t^{\mfa}_{0}\left[\beta \right], \dots , t^{\mfa}_{n-1}\left[\beta \right] )) $ \medskip \\
+		$f^{\mathfrak{b}}(F(t^{\mfa}_{0}\left[\beta \right]), \dots , F(t^{\mfa}_{n-1}\left[\beta \right]))$ \medskip \\
+		$f^{\mathfrak{b}}(t^{\mathfrak{b}}_{0}\left[ F\circ \beta \right], \dots t^{\mathfrak{b}}_{n-1}\left[ F\circ \beta \right]) = t^{\mathfrak{b}}\left[ F\circ \beta \right]$\medskip \\
+	
+	\textit{2. Für jede Formel $\phi$ gilt:}\\
+		$\mfa \models \phi \left[\beta \right] \Leftrightarrow \mathfrak{b} \models \phi \left[F \circ \beta \right]$\medskip\\
+		$\phi = t_0 \circeq t_1:$\medskip\\
+		$\mfa \models \phi \left[\beta \right] \Leftrightarrow t^{\mathfrak{b}}_{0}\left[ \beta \right] = t^{\mathfrak{b}}_{1}\left[ \beta \right]$\medskip\\
+		F injektiv: \medskip\\
+			$\mfa \models \phi \left[ \beta \right] \Leftrightarrow t_0^{\mathfrak{b}}\left[ F \circ \beta \right] = F(t^{\mathfrak{b}}_{0}\left[ \beta \right]) = F(t^{\mathfrak{b}}_{1}\left[ \beta \right])$\medskip\\
+			$t_1^{\mathfrak{b}}\left[ F \circ \ \beta \right] \Leftrightarrow \mathfrak{b} \models \phi \left[ F \circ \beta \right]$\bigskip \\
+		$\phi = R_{t_0 \dots t_{n-1}}$ analog \medskip \\
+		$\phi = \lnot \psi : \mfa \models \phi \left[ \beta \right] \Leftrightarrow \mfa \nvDash \psi \left[ \beta \right] $\medskip \\
+		$\Leftrightarrow \mathfrak{b} \nvDash \psi \left[ F \circ \beta \right] \Leftrightarrow \mathfrak{b} \models \phi \left[F \circ \beta \right]$ \medskip\\
+		$\phi = (\phi_0 \wedge \phi_1)$ analog \medskip \\
+		$\phi = \exists v \phi :$ \bigskip\\
+		
+		\textbf{"$\Rightarrow$":} $\mfa \models \phi \left[\beta\right]$ \medskip \\
+			$\Rightarrow \exists a \in A $ mit $\mfa \models \phi \left[ \beta \frac{a}{v}\right]$ \medskip\\
+			Es gilt:\\
+			$F \circ (\beta\frac{a}{v}) = (F \circ \beta) \frac{F(a)}{v}$ also folgt\medskip\\
+			$\mfa \models \psi \left[(F \circ \beta) \frac{F(a)}{v}) \right]$ also \medskip\\
+			$\mfa \models \phi \left[F \circ \beta \right]$ \medskip\\
+		
+		\textbf{"$\Leftarrow$":}\medskip\\
+			$\mfa \models \psi \left[ F \circ \beta \right] \frac{b}{v}$ \medskip\\	
+			$F$ surjektiv $\leftarrow \exists a \in A$ mit $F(a) = b$\medskip\\
+			$\Rightarrow \mfa \models \psi \beta \left[ \beta \frac{a}{v} \right] \Rightarrow \mfa \models \psi \left[ \beta \right]$ \bigskip\\
+			Bemerkung: Zwei endliche L-Strukturen $\mfa, \mathfrak{b}$ sind genau dann äquivalent, wenn sie äquivalent sind.\bigskip\\
+			Es sei also A = $\lbrace a_1, \dots a_N$ endlich.\\
+			Es reicht eube Aussage $\phi$ auszugeben mit $\mathfrak{b} \models \phi \Leftrightarrow \mfa $ und $\mathfrak{b}$ sind isomorph. \medskip\\ 
+			
+			Dazu sei\\
+			$WIEDERLICHE FORMEL!$\medskip\\
+			
+			$\lceil $Diese Formel hat die Länge $O(N^{Max(k,L)})$ wobei k die maximale Stellenanzahl einen L-Symbols sei.$ \rceil$\\
+			Gegeben $\mfa$ und $L$, braucht man $O(M^{c(N,L)})$ Schritte, um festzustellen, ob $\mathfrak{b}$ zu $\mfa$ isomorph ist.
+			D.h.: $\mfa \cong \mathfrak{b}$ bei festen $\mfa$ ist ein P-Problem, bei $\mfa , \mathfrak{b}$ beliebig ein NP-Problem. \bigskip\bigskip\\
+			
+	\textbf{Substitution} \\
+		Ersetze eine Variable x durch einen Term s\\\\
+		Für Terme:\\
+		$t = c: t \frac{s}{x} = c$\medskip\\
+		$t = v: t \frac{s}{x}  \begin{cases}  s,&  v=x\\
+											  v,&  v\neq x
+							\end{cases} $\\\\
+		$t = f_{t_{0}}\dots f_{t_{N-1}}: t\frac{s}{x} = f_{t_{0}} \frac{s}{x} \dots f_{t_{N-1}} \frac{s}{x}$
+		
+		\textbf{Lemma:} \\\\
+			Es sei $t$ ein L-Term und $\mfa$ eine L-Struktur, x eine Variable, $\beta$ eine Belegung, dann gilt: \medskip\\
+			$(t \frac{s}{x}) \left[ \beta \right] = t^{\mfa} \left[ \beta \frac{s^{\mfa}\left[\beta\right]}{x} \right]$ \medskip\\
+		
+		\textbf{Beweis:}\\\\
+			Beweis durch Rekursion\\
+			Entscheidender Schritt:\\
+			$t = x: t\frac{s}{x} = s$, also $(t\frac{s}{x})^{\mfa}\left[ \beta \right] = s^{\mfa} \left[ \beta\right]$\medskip\\
+			$= t^{\mfa}\left[\beta \frac{s^{\mfa}\left[\beta\right]}{x} \right]$\medskip\\
+		
+		\textit{Substitution für Formeln:}\\
+			$\phi = t_0 \circeq t_1: \phi \frac{s}{x} = t_0 \frac{s}{x} =t_1 \frac{s}{x}$\medskip\\
+			$\phi= R_{t_{0} \dots t_{N-1}}$ analog \medskip\\
+			$\phi = \lnot \psi:\phi\frac{s}{x} = \lnot \psi \frac{s}{x}$\medskip\\
+			$\phi = (\phi_0 \wedge \phi_1)$ analog \medskip \\
+			$\phi \frac{s}{x}  \begin{cases}  \phi&  v=x\\
+												\exists v\psi \frac{s}{x} &  v\neq x
+										\end{cases} $\\\\
+			Das heißt, nur freie Variablen werden ersetzt.\medskip\\
+			Problem: Was ist mit Formeln wie:\medskip\\				
+			$\exists v_0 Rv_0 v_1$ und $s=fv_0$?\medskip\\
+			Dann ist $\phi \frac{s}{v_1} = \exists v_0 Rv_0 fv_0 \quad (v \neq x)$ \\
+			Wenn $\beta_0 = a$, aber $\phi$ richtig ist für $v_0 = b_1,v_1 = c$ also $\phi \left[ v_0 \rightarrow a, v_1 \rightarrow c\right] = \exists v_0 R v_0 c$ , sei $f(a)=c$. \bigskip\\
+			$\phi = \phi (v_0, v_1) = \exists v_0 \psi$ \\
+			$\psi = \psi (v_0, v_1) = R v_0 v_1$ \\
+			Seien $a,b,c$ paarweise verschieden\\
+			$f(a) = c $\\
+			$f(b) = d $\\
+			und $R(b,c)$ sei wahr, alle anderen $R(\dots)$ falsch\\
+			$\Rightarrow \phi \left[ a, c\right] = \exists v_0Rv_0fv_0$ und $\phi \left[ a, c \right]$  = $\exists v_0 R v_0 f v_0$ ist falsch, da man nicht $v_0 = b, R v_0 = c$ erreichen kann.\\\\\\
+			
+		\textbf{Definition:} \\
+			Eine Variable $x$ ist frei für $s$ in $\phi$, wenn an den Stellen in $\phi$, an denen $x$ frei vorkommt keine Variable von $s$ im Gültigkeitsbereich eines Quantors liegt.\\\\
+			
+			Rekursiv:\medskip\\
+			$\phi = t_0 \circeq t_1, \phi R t_0 \dots t_n-1 $ - $x$ frei für $s$ \medskip\\
+			$\phi = \lnot \phi , \phi (\phi_0 \wedge \phi_1)$ - x frei für s in $\phi \Leftrightarrow x $frei für $s $in $\phi $bzw. in$ \phi_0$ und $\phi_1$ \medskip\\
+			$\phi = \exists v \psi$ - x freu für s in $\phi \Leftrightarrow$\\ 
+			$v = x$ oder ($v = x und v kommt nicht in s vor$)\medskip\\
+			
+		\textbf{Lemma:}\\
+		Wenn x frei für s in $\phi$ ist und $\mfa$ eine L-Struktur, $\beta$ eine Belegung, dann gilt:\\
+		$\mfa \models \phi \frac{s}{x} \left[ \beta \right] \Leftrightarrow \mfa \models \phi \left[ \beta \frac{s^{\mfa}\beta}{x} \right]$
+
+		\textbf{Beweis:}\\\\
+		Analog zum obigen. Entschedent ist der Schritt für $\phi = \exists v \phi$
+
+
+%VL 16.12.13
+\textbf{Wdh:}$\mathfrak{A},\mathfrak{B}$ elementar äquivalent $\Leftrightarrow (\mathfrak{A} \models \varphi \Leftrightarrow \mathfrak{B}\models \varphi$ für alle L-Aussagen $\varphi$)\\
+Substitution: Es sei x eine Variable und s ein Term\begin{itemize}
+\item Term t $\rightarrow$ t $\frac{s}{x}$ (nicht rekursives Ersetzen)
+\item Formel $\varphi \to \frac{s}{x}$\\
+Wichtig: nur \underline{frei} vorkommende  x werden durch s ersetzt.
+\item x ist \underline{frei} für s in $\varphi \Leftrightarrow$ überall dort, wo x frei vorkommt, ist keine Variable von s in $\varphi$ gebunden.
+\end{itemize}
+\textbf{Lemma} (t$\frac{s}{x})^\mathfrak{A}[\beta]=t^\mathfrak{A}[\beta \frac{s^\mathfrak{A}[\beta]}{x}]$\\
+Wenn x für s in $\varphi$ frei ist, gilt\\
+$\mathfrak{A}\models(\varphi\frac{s}{x})[\beta]\Leftrightarrow \mathfrak{A}\models \varphi[\beta\frac{s^\mathfrak{A}[\beta]}{x}]$\\ \\ \\  \\
+\textbf{Beweis (für Formeln):}Durch Induktion über die Länge von $\varphi$.
+\begin{itemize}
+\item $\varphi = t_0\doteq t_1$ Dann gilt:\\
+$\mathfrak{A}\models(\varphi \frac{s}{x})[\beta] \Leftrightarrow \mathfrak{A}\models(t_0\frac{s}{x}\doteq t_1 \frac{s}{x})[\beta]\\
+\Leftrightarrow(t_0\frac{s}{x}^\mathfrak{A} [\beta]=(t_1\frac{s}{x})^\mathfrak{A}[\beta]\in$ A\\
+$\Leftrightarrow \mathfrak{A}\models(t_0 \doteq t_1)[\beta \frac{s^\mathfrak{A}[\beta]}{x}]\in $ A\\
+$\Leftrightarrow \mathfrak{A}\models (t_0 \doteq t_1) [\beta \frac{s^\mathfrak{A}[\beta}]{x}]\Leftrightarrow \mathfrak{A}\models \varphi[\beta \frac{s^\mathfrak{A}[\beta]}{x}]$
+\item $\varphi=R~t_0...t_{n-1}$: Analog.
+\item $\varphi = \neg \psi: \mathfrak{A} \models (\varphi \frac{s}{x}) [\beta]\\
+\Leftrightarrow \mathfrak{A}\not\models (\psi \frac{s}{x})[\beta]\\
+\Leftrightarrow \mathfrak{A} \not\models \psi [\beta \frac{s^\mathfrak{A}[\beta]}{x}]\\
+\Leftrightarrow \mathfrak{A} \models \varphi [\beta \frac{s^\mathfrak{A}[\beta]}{x}]$
+\item $\varphi=(\varphi_0\land \varphi_1)$: Analog
+\item Existenz quantifizierte Formeln:\\
+1. Fall $\varphi = \exists x\phi$. x ist nicht mehr frei in $\psi$, also $\varphi \frac{s}{x}$=$\varphi$. Außerdem spielt der Wert von x in $\beta$ bzw. $\beta \frac{s^\mathfrak{A}[\beta]}{x}$ keine Rolle.\\
+$\mathfrak{A}\models (\varphi \frac{s}{x})[\beta] \Leftrightarrow \mathfrak{A} \models \varphi [\beta]\\
+\Leftrightarrow \mathfrak{A}\models \varphi [\beta \frac{s^\mathfrak{A}[\beta]}{x}]$.\\
+2.Fall: $\varphi = \exists y\phi$, x,y verschiedene Variable und x sei frei in $\psi$. $\Rightarrow \varphi\frac{s}{x}=\exists y\psi \frac{s}{x}$\\
+$\mathfrak{A} \models (\varphi\frac{s}{x})[\beta]\Leftrightarrow$ Es gibt b$\in$A, so dass: $\mathfrak{A}\models (\psi\frac{s}{x})[\beta\frac{b}{y}]\\
+\Leftrightarrow \mathfrak{A}\models \psi [\beta\frac{b}{y}\frac{s^\mathfrak{A}[\beta\frac{b}{y}]}{x}]$ nach Induktion, mit der neuen Belegung $\beta \frac{b}{y}$. Nach Voraussetzung (x frei für s in $\varphi$) kommt y nicht in s vor, also gilt $s^\mathfrak{A}[\beta\frac{b}{y}]=s^\mathfrak{A}[\beta]\in $A. Somit:\\
+...$\Leftrightarrow$ Es gibt b, so dass $\Leftrightarrow \mathfrak{A}\models \psi[\beta\frac{s^\mathfrak{A}[\beta]}{x}\frac{b}{y}]$\\
+$\Leftrightarrow \mathfrak{A}\models(\exists y\psi)[\beta\frac{s^\mathfrak{A}[\beta]}{x}]\Leftrightarrow \mathfrak{A} \models \varphi[\beta \frac{s^\mathfrak{A}[\beta]}{x}]~~\square$
+\end{itemize}
+\subsection{Allgemeingültige Formeln}
+Ziel: Begriff der Beweisbarkeit, zunnächst: Beweis. Bausteine dafür?\\
+\textbf{Def.}: Eine Formel $\varphi$ $"$ heißt \underline{allgemeingültig}, kurz $"~\models\varphi$, wenn für alle L-Strukturen $\mathfrak{A}$ und alle Belegungen $\beta$ gilt:\\
+$$\mathfrak{A}\models \varphi[\beta]$$\\
+Äquivalent dazu gilt:\\
+$$\mathfrak{A}\models \forall x_1... \forall x_n ~\varphi(x_1,...,x_n)$$
+(Also sind $x_1,...,x_n$ mind. die freien Variablen von $\varphi$) für alle L-Strukturen $\mathfrak{A}$ \\
+\textbf{Def.}: Eine \underline{Tautologie} entsteht, indem man eine aussagenlogische Tautologie F=F($A_0,...,A_{n-1}$) in den aussagenlogischen Variablen $A_0,...,A_{n-1}$ die Variablen $A_0,...,A_{n-1}$ durch L-Formeln $\varphi_0,...,\varphi_{n-1}$ ersetzt.\\
+\textbf{Beispiel:} ($A_0 \lor \neg A_0$) ist eine aussagenlogische Tautologie, $\varphi=Rv_0v_1$ ist eine L-Formel (R zweistellige Relation)\\
+$\Rightarrow (R_v0v_1 \lor \neg Rv_0v_1$) ist eine Tautologie.
+Oder $\varphi_0 =(\exists v_0 Rv_0v_1 \land \neg v_1 \doteq c)$\\
+$\Rightarrow ((\exists v_0R_0v_1 \land \neg v_1 \doteq c) v\neg \exists v_0Rv_0v_1 \land v_1 \doteq c)$ ist eine Tautologie\\ \\
+\textbf{Lemma} Tautologien sind allgemeingültig.\\ \\
+\textbf{Beweis}: klar. (Annmerkung des Authors: Natürlich darf er einfach trivial sagen ...)\\ \\
+\textbf{Lemma (Gleichheitsaxiome)}: Die folgenden Formeln sind allgemeingültig, dabei stehen $x_0,x_1,...$ für beliebige Variablen.\\
+Reflexivität: $x_0 \doteq x_0$\\
+Symmetrie: $x_0\doteq x_1 \leftrightarrow x_1 \doteq x_0)$\\
+Transitivität. $((x_o\doteq x_1 \land x_1 \doteq x_2)\rightarrow x_0 \doteq x_2)$\\
+\begin{itemize}
+\item Für jede k-stellige Relation R\\
+$((x_0\doteq x_k \land ... \land x_{k-1} \doteq x_{2k-1})$\\
+$\rightarrow (R_x0...x_{k-1} \leftrightarrow Rx_k ... x_{2k-1}))$\\
+\item Für jede k-stellige Funktion f in L\\
+$((x_0 \doteq x_k \land ... \land x_{k-1} \doteq x_{2k-1})$\\
+$\rightarrow f x_0 ... x_{k-1} \doteq f x_k... x_{2k-1})$
+\end{itemize}
+\textbf{Beweis}: Die ersten drei Axiome gelten in allen Strukturen $\mathfrak{A}$, da $"="$ eine Äquivalenzrelation ist: z.B. seien a,b$\in$A, dann gilt a=b $\Leftrightarrow$ b= A.\\
+Sei jetzt R eine K-stellige Relation.\\
+$a_0=a_l,...,a_{k-1}=a_{2k-1} \Rightarrow (a_0,...,a_{k-1})=(a_k,...,a_{2k-1}) \in A^k$, somit ($a_0,...,a_{k-1})\in R^\mathfrak{A} \Leftrightarrow (a_k,...,a_{2k-1})\in R^\mathfrak{A}$\\
+Analog für Funktionen. $\square$\\ \\
+\textbf{Lemma} (Existenzquantoraxiome): Für alle Formeln $\varphi$, alle Variablen x und alle Terme s, so das x für s in $\varphi$ frei ist, ist allgemeingültig:\\
+($\varphi\frac{s}{x}\rightarrow \exists x\varphi)$\\ \\
+\textbf{Beweis}: Interessant sind nun $\mathfrak{A},\beta$, so dass $\mathfrak{A} \models (\varphi\frac{s}{x})[\beta]$. Nachddem Substitutionslemma gilt $\mathfrak{A}\models\varphi[\beta\frac{s^\mathfrak{A}[\beta]}{x}]$. Also gilt es a=s$^\mathfrak{A}[\beta]\in$ A, so dass $\varphi[\beta\frac{a}{x}]$. Also gilt $\mathfrak{A}\models(\exists x\varphi)[\beta].~~\square$\\ \\
+\textbf{Lemma}(Modus Ponem): Seien $\varphi$ und $\psi$ Formeln. Aus $\mathfrak{A}\models\varphi$ und $\mathfrak{A}\models (\varphi \rightarrow \psi)$ folgt dann auch $\mathfrak{A}\models \psi$ \\ \\
+\textbf{Beweis}: Klar $\square$\\ \\
+Insbesondere: Seien $\varphi$ und ($\varphi\to \psi$) allgemeingültig, dann ist auch $psi$ allgemeingültig.\\ \\
+\textbf{Lemma}(Existenzeinführung): Seien $\varphi,\psi$ Formeln und x eine Variable, die in $\psi$ nicht frei vorkommt. Wenn $\varphi \to \psi$ allgemeingültig ist, dann ist auch $(\exists x\varphi) \to \psi$ allgemeingültig.\\
+Zur Errinerung: $A\neq \emptyset$ in jeder Struktur.\\ \\
+\textbf{Beweis}: Interessant sind nur $\mathfrak{A},\beta$ mit $\mathfrak{A}\models (\exists x\varphi)[\beta]$. Also existiert a$\in$A mit $\mathfrak{A}\models \varphi[\beta\frac{a}{x}]$. Nach dem Modus Ponem gilt $\mathfrak{A}\models \psi [\beta\frac{a}{x}]$. Da x in $\psi$ nicht vorkommt, gitl $\mathfrak{A}\models \psi [\beta]$. Also auch $\mathfrak{A}\models(\exists x\varphi \rightarrow \psi)[\beta].~~\square$\\ \\
+\textbf{Verschärfung des Lemmas}: Seien $\varphi, psi $ Formeln, x nicht frei in $\psi$.\\
+Aus $\mathfrak{A}\models (\varphi \rightarrow  \psi)[\beta]$ folgt dann auch $\mathfrak{A} \models(\exists x\varphi \to \psi)[\beta]$.
 \end{document}
