@@ -10,3 +10,4 @@
 \contentsline {section}{\numberline {2}Pr\IeC {\"a}dikatenlogik}{20}{section.21}
 \contentsline {subsection}{\numberline {2.1}Strukturen und Formeln}{20}{subsection.22}
 \contentsline {subsection}{\numberline {2.2}Semantik}{24}{subsection.30}
+\contentsline {subsection}{\numberline {2.3}Allgemeing\IeC {\"u}ltige Formeln}{30}{subsection.31}
