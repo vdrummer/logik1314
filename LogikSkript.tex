@@ -4,6 +4,7 @@
 \usepackage{textcomp}
 \usepackage{amsmath}
 \usepackage{stmaryrd}
+\usepackage{ulem}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
 % zus�tzliche mathematische Symbole, AMS=American Mathematical Society 
@@ -944,4 +945,59 @@ Zur Errinerung: $A\neq \emptyset$ in jeder Struktur.\\ \\
 \textbf{Beweis}: Interessant sind nur $\mathfrak{A},\beta$ mit $\mathfrak{A}\models (\exists x\varphi)[\beta]$. Also existiert a$\in$A mit $\mathfrak{A}\models \varphi[\beta\frac{a}{x}]$. Nach dem Modus Ponem gilt $\mathfrak{A}\models \psi [\beta\frac{a}{x}]$. Da x in $\psi$ nicht vorkommt, gitl $\mathfrak{A}\models \psi [\beta]$. Also auch $\mathfrak{A}\models(\exists x\varphi \rightarrow \psi)[\beta].~~\square$\\ \\
 \textbf{Verschärfung des Lemmas}: Seien $\varphi, psi $ Formeln, x nicht frei in $\psi$.\\
 Aus $\mathfrak{A}\models (\varphi \rightarrow  \psi)[\beta]$ folgt dann auch $\mathfrak{A} \models(\exists x\varphi \to \psi)[\beta]$.
+
+\subsection{Der Gödelsche Vollständigkeitssatz}
+\textbf{Definition}(Hilbertkalkül): Eine Formel $\phi$ in einer Sprache L heißt \underline{beweisbar}, wenn sie entweder ein Axiom der folgenden Typen (B1 - B3) ist, oder aus beweisbaren Formeln durch eine der folgenden Schlussregeln (B4, B5) ergibt.
+\begin{itemize}
+\item \textbf{B1 (Tautologie)} Es sei $f(a_o, ..., a_{n-1})$ eine allgemeingültige Formel der Aussagenlogik und $\phi_0,...,\phi_{n-1]}$ Formeln, dann ist $f(\phi_0, ...,  \phi_{n-1})$ eine \underline{Tautologie}.
+\item \textbf{B2 (Gleichheitsaxiome)}
+\begin{itemize} \item Äquivalenzaxiome, z.B. $(x = y \wedge y = z) \rightarrow y = z$
+\item Kongruenzaxiome, z.B. $x = y \rightarrow f(x)\doteq f(y)$
+\end{itemize}
+\item \textbf{B3 (Existenzaxiome)} Es sei $x$ frei für $t$ in $\phi$, dann ist $\phi \frac{t}{x} \rightarrow \exists x \phi$ ein Existenzaxiom.
+\item \textbf{B4 (Modus ponens)} Wenn $\phi \rightarrow \psi$ und $phi$ beweisbar ist, ist $\phi$ beweisbar.
+\item \textbf{B5 (Existenzführung)} Es seien $\phi, \psi$ Formeln und $x$ sei nicht frei in $\psi$. Wenn $\phi \rightarrow \psi$ beweisbar ist, dann ist auch $\exists x \phi \rightarrow \psi$ beweisbar.
+\end{itemize}
+Ein \underline{Beweis} von $\phi$ ist also ein Tupel von Formeln $phi_0, ..., \phi_n$ mit $\phi_n = \psi$, so dass für alle i die Formel $\phi_i$ ein Axiom vom Typ B1 - B3 ist, oder aus den Formeln $\phi_1$ bzw. $\phi_j$ und $\phi_k$ und $j, k < 1$ durch einen Schluss vom Typ B4 oder B5 hervorgeht.\\\\
+\textbf{Satz (Gödelscher Vollständigkeitssatz 1)}: Eine Formel $\phi$ in einer Sprache L ist genau dann beweisbar, wenn sie allgemeingültig ist:\\
+\begin{center}
+$\vdash \phi \Leftrightarrow \models \phi$
+\end{center}
+\newpage
+\textbf{Notation}: "$t \subset \phi$" bedeutet: "$\phi$ ist in der Sprache L beweisbar." \\ Die Richtung "$\Leftarrow$" folgt aus Abschnitt 2.3.\\
+\textbf{Lemma}: (abgeleitete Axiome und Schlussregeln).
+\begin{itemize}
+\item \textbf{1. Aussagenlogik}: Seien $\phi_1, ..., \phi_n$ beweisbar und $(\phi_1 \wedge ... \wedge \phi_n) \rightarrow \psi$ eine Tautologie, dann ist $\psi$ beweisbar.
+\item \textbf{2. All-Axiom}: Sei $x$ frei für $t$ in $\phi$, dann ist $\forall x \phi \rightarrow \phi \frac{t}{x}$ beweisbar.
+\item \textbf{3. All-Einführung}: Es sei $x$ frei in $\phi$. Wenn $\phi \rightarrow \psi$ beweisbar ist, dann auch $\phi \rightarrow \forall x \psi$.
+\end{itemize}
+\textbf{Beweis}: Zu 1.) $(\phi_1 \wedge ... \wedge \phi_n) \rightarrow \psi$ ist eine andere Schreibweise für $\neg \phi_1 \vee ... \vee \neg \phi_n \vee \phi_i$, bzw. für $\phi_1 \rightarrow (\phi_2 ... \rightarrow (\phi_n \rightarrow \psi) ... )$. Insbesondere ist $(\phi_1 \wedge ... \wedge \phi_n) \rightarrow \psi) \rightarrow (\phi \rightarrow (\phi_2 \rightarrow ... \rightarrow (\phi_n \rightarrow \psi) ... ))$ eine Tautologie, somit auch $\phi_1 \rightarrow (\phi_2 \rightarrow ... \rightarrow \phi_n \rightarrow \psi) ... )$\\
+Mit Modus ponens sind dann auch $\phi_2 \rightarrow ... \rightarrow (\phi_n \rightarrow \psi)$ und $\phi_n \rightarrow \psi$ beweisbar.\\
+Zu 2. $\forall x \phi \rightarrow \phi \frac{t}{x}$ ist "Makro" für \sout{$\neg ( \neg$}$\exists x \neg \phi$ \sout{$)$}$\vee \phi \frac{t}{x}$ und das ist äquivalent zu $\neg \phi \frac{t}{x} \rightarrow \exists x \neg \phi$. Da $x$ für $t$ frei in $\phi$ ist, ist $x$ für $t$ frei in $\exists x \neg \phi \neg \phi$, und $\neg \phi \frac{t}{x} \rightarrow$ ist ein Existenzaxiom. Daraus folgt $\forall x \phi \rightarrow \phi \frac{t}{x}$ mit Aussagenlogik.\\
+Zu 3. Es ist $\phi \rightarrow \forall x \phi$ äquivalent zu $\neg \phi \vee \neg \exists x \neg \psi$ und $x$ ist nicht frei in $\neg \phi$. Aus $\phi \rightarrow \psi$ folgt $\neg \psi \rightarrow \neg \phi$ mit Aussagenlogik und daraus $\exists x \neg \psi \rightarrow \neg \phi$ mit Existenzeinführung. Mit Aussagenlogik folgt $\phi \rightarrow \neg \exists x \neg \psi$, also $\phi \rightarrow \forall x \psi$. $\square$\\\\
+\textbf{Beispiel}: Beweise $\exists x \forall y R x y \rightarrow \forall y \exists x R x y$.
+\begin{itemize}
+\item{1)} $\forall y R x y \rightarrow R x y$ (All-Axiom)
+\item{2)} $R x y \rightarrow \exists x R x y$ (Existenz-Axiom)
+\item{3)} $\forall y R x y \rightarrow \exists x R y y$ (Aussagenlogik aus 1, 2)
+\item{4)} $\exists x \forall y R x y \rightarrow \exists x R x y$ (Existenz-Einführung)
+\item{5)} $\exists x \forall y R x y \rightarrow \forall y \exists x R x y$ (All-Einführung)
+\end{itemize}
+All-Einführung: Sei $\phi = T$ (z.B. $\phi = (x = y))$. Dann ist $\phi \rightarrow \psi$ äquivalent zu $\psi$. Also ist mit $\psi$ auch $\forall x \psi$ beweisbar. Um den Gödelschen Vollständigkeitssatz zu beweisen, reicht es, Aussagen zu betrachten.\\
+\textbf{Lemma}: Es sei $\phi = \phi (x_1, ..., x_n)$ eine L-Formel. Es sei $L = \{ c_1, ..., c_n \}$ distjunkt zu L: Dann gilt $\forall_L \phi (x_1, ..., x_n) \Leftrightarrow \vdash_L \vee c \phi (c_1, ..., c_n).$
+\textbf{Beweis}: "$\Rightarrow$" Mit der All-Einführung folgt: Wenn $\phi (x_1, ..., x_n)$ beweisbar ist, dann ist $\forall x ... \forall y_n \phi (x_1, ..., x_n)$ beweisbar in L- Dann ist der zugehörige L-Beweis auch ein ($L \cup C$)-Beweis, in dem aber $c_1, ..., c_n$ (noch) nicht vorkommen. Folgt $\forall x_1 ... \forall y_n \phi (x_1, ..., y_n) \rightarrow \phi (c_1, ..., c_n)$ wird Modus ponens gewählt "$t_{L \cup C} \phi (c_1, ..., c_n)$.\newpage
+"$\Leftarrow$"$ $Es sei $B = (\phi_1, ..., \phi_n = \phi (c_1, ..., c_n))$ ein $L \cup C$-Beweis von $\phi (c_1, ..., c_n$. Es seien $y_1, ..., y_n$ Variablen, die noch nicht vorkommen. Ersetzen von $c_1, ..., c_n$ durch $y_1, ..., y_n$ liefert einen L-Beweis von $\phi(y_1, ..., y_n)$. All-Einführung liefert einen L-Beweis $\forall y_1 ... \forall y_n \phi (y_1, ..., y_n)$. Mit All-Axiomen und Modus ponens folgt $\phi (x_1, ..., x_n)$. $ \square$\\
+Weitere Schritte im  Beweis des Vollständigkeitssatzes.
+\begin{itemize}
+\item{1)} Erweitere $\{ \neg \phi \}$
+\item{2)} Vervollständige Theorie
+\item{3)} Versuche ein Model für die Theorie zu finden
+\end{itemize}
+\textbf{Definition}: Eine \underline{L-Theorie} ist eine Menge von L-Aussagen. Eine L-Struktur $a$ ist ein Model von $T$, $a \models T$, wenn alle Aussagen aus $T$ im Modell $a$ gelten. Eine Aussage $\psi$ \underline{folgt logisch aus $T$}, $T \models \psi$, wenn $\psi$ in allen Modellen von $T$ gilt.\\\\
+\textbf{Definition}: Eine Formel $\phi$ ist in $T$ \underline{beweisbar} in der Sprache L, kurz $T \vdash_L \psi$, wenn es Aussagen $\phi_1, ..., \phi_n \in T$ gibt, sodass $\vdash_L ((\phi_1 \wedge ... \wedge \phi_n) \rightarrow \phi)$\\
+Eine Theorie $T$ ist \underline{widersprüchlich}, wenn $T \vdash_L \bot$, das heißt, wenn $phi_1, ..., \phi_n \in T$ existieren mit $\vdash_L \neg (\phi_1 \wedge ... T$ widerspruchsfrei $\Leftrightarrow T$ ist nicht mehr widersprüchlich. Wir kennen $T$ vollständig, wenn für jede $L$-Aussage $\psi$ gilt: $\psi \in T$ oder $\neg \psi \in T$. Eine Formel $\psi$ heißt in $T$ \underline{konsistent}, wenn $\models \cup \{ \psi \}$ widerspruchsfrei ist.\\\\
+\textbf{Satz (Gödelscher Vollständigkeitssatz 2)}: Eine Theorie ist genau dann widerspruchsfrei, wenn sie ein Modell besitzt.\\\\
+\textbf{Behauptung)}: "Gödel 2" impliziert "Gödel 1". Zu Gödel 1 sei $\phi$ eine $L$-Aussage. Klar: $\vdash_L \phi \Rightarrow \models \phi$ (Abs. 2.3). Wir nehmen an, dass $\models \phi$. Also existiert kein Modell für $\neg \phi$. Nach Gödel 2 ist $\{ \neg \phi \}$ widersprüchlich $\vdash_L \neg \neg \phi$. Mit Aussagenlogik folgt $\vdash_L \phi$. $\square$
+\textbf{Beweis}: Es sei $a$ eine $L$-Struktur. Das vollständige Diagramm von $a$ ist die Theorie $\vdash_a = \{ \phi | \phi$ ist L-Aussage und $a \models \phi \}$. Dann ist $\vdash_a$ vollständig, denn in $a$ gilt entweder $\phi$ oder $\neg \phi$.\\\\
+\textbf{Definition}: Es sei $L$ eine Sprache $C$ eine Menge von Konstanten. Dann heißt $T$ eine \underline{Henkin-Theorie} zu $L \cup C$, wenn für alle $L \cup C$-Formeln $\phi(x)$ eine Konstante $c \in C$ entsteht, sodass $\exists x \phi(x) \rightarrow \phi \frac {c}{x}$
 \end{document}

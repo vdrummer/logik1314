@@ -11,3 +11,4 @@
 \contentsline {subsection}{\numberline {2.1}Strukturen und Formeln}{20}{subsection.22}
 \contentsline {subsection}{\numberline {2.2}Semantik}{24}{subsection.30}
 \contentsline {subsection}{\numberline {2.3}Allgemeing\IeC {\"u}ltige Formeln}{30}{subsection.31}
+\contentsline {subsection}{\numberline {2.4}Der G\IeC {\"o}delsche Vollst\IeC {\"a}ndigkeitssatz}{32}{subsection.32}
